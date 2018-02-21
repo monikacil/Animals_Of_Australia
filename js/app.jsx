@@ -60,13 +60,13 @@ class App extends React.Component{
         });
         this.getData(this.state.position.latitude, this.state.position.longitude, radius);
     };
-    getNameOfGroups = (e) =>{
-        if (e.vernacularName) {
-            return (e.vernacularName)
-        } else if(e.raw_vernacularName) {
-            return (e.raw_vernacularName)
-        } else if(e.scientificName){
-            return (e.scientificName)
+    getNameOfGroups = (obj) =>{
+        if (obj.vernacularName) {
+            return (obj.vernacularName)
+        } else if(obj.raw_vernacularName) {
+            return (obj.raw_vernacularName)
+        } else if(obj.scientificName){
+            return (obj.scientificName)
         } else {
             return null;
         }
@@ -83,38 +83,38 @@ class App extends React.Component{
         list.forEach(e => {
             if (e.classs === "Aves" || e.speciesGroups[1] === "Birds") {
                 let nameOfGroup = this.getNameOfGroups(e);
-                if(nameOfGroup !== null && birds.indexOf(nameOfGroup) === -1){
-                    birds.push(nameOfGroup);
+                if(nameOfGroup !== null && birds.find(e => e.name === nameOfGroup) === undefined){
+                    birds.push({name: nameOfGroup, img: e.imageUrls});
                 }
             }
             else if (e.classs === "Insecta" || e.speciesGroups[1] === "Insects") {
                 let nameOfGroup = this.getNameOfGroups(e);
-                if(nameOfGroup !== null && insects.indexOf(nameOfGroup) === -1){
-                    insects.push(nameOfGroup);
+                if(nameOfGroup !== null && insects.find(e => e.name === nameOfGroup) === undefined){
+                    insects.push({name: nameOfGroup, img: e.imageUrls});
                 }
             }
             else if (e.classs === "Mammalia" || e.speciesGroups[1] === "Mammals") {
                 let nameOfGroup = this.getNameOfGroups(e);
-                if(nameOfGroup !== null && mammals.indexOf(nameOfGroup) === -1){
-                    mammals.push(nameOfGroup);
+                if(nameOfGroup !== null && mammals.find(e => e.name === nameOfGroup) === undefined){
+                    mammals.push({name: nameOfGroup, img: e.imageUrls});
                 }
             }
             else if (e.classs === "Amphibia" || e.speciesGroups[1] === "Amphibians") {
                 let nameOfGroup = this.getNameOfGroups(e);
-                if(nameOfGroup !== null && amphibians.indexOf(nameOfGroup) === -1){
-                    amphibians.push(nameOfGroup);
+                if(nameOfGroup !== null && amphibians.find(e => e.name === nameOfGroup) === undefined){
+                    amphibians.push({name: nameOfGroup, img: e.imageUrls});
                 }
             }
             else if (e.classs === "Reptilia" || e.speciesGroups[1] === "Reptiles") {
                 let nameOfGroup = this.getNameOfGroups(e);
-                if(nameOfGroup !== null && reptiles.indexOf(nameOfGroup) === -1){
-                    reptiles.push(nameOfGroup);
+                if(nameOfGroup !== null && reptiles.find(e => e.name === nameOfGroup) === undefined){
+                    reptiles.push({name: nameOfGroup, img: e.imageUrls});
                 }
             }
             else if (e.classs === "Arachnida" || e.speciesGroups[1] === "Arachnids") {
                 let nameOfGroup = this.getNameOfGroups(e);
-                if(nameOfGroup !== null && arachnids.indexOf(nameOfGroup) === -1){
-                    arachnids.push(nameOfGroup);
+                if(nameOfGroup !== null && arachnids.find(e => e.name === nameOfGroup) === undefined){
+                    arachnids.push({name: nameOfGroup, img: e.imageUrls});
                 }
             }
         });

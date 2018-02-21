@@ -26,7 +26,7 @@ export default class AnimalList extends React.Component{
     };
     createLi =(group) => {
         return group.map((el, index) =>{
-            return <li onClick={this.showImage} key={index}>{el}</li>
+            return <li onClick={this.showImage} key={index}>{el.name}</li>
         })
     };
     createUl = () => {
