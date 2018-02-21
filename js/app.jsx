@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import '../scss/main.scss';
 import MapContainer from "./mapContainer.jsx";
 import AnimalList from "./list.jsx";
+import InfoBox from "./infoBox.jsx";
 import RadiusButtons from "./radiusButtons.jsx";
 import {Header, Footer} from "./mainTemplate.jsx";
 
@@ -11,7 +12,8 @@ class OptionContainer extends React.Component{
         return(
             <div>
                 <RadiusButtons onButtonRadius={this.props.onButtonRadius}/>
-                <AnimalList animalsLists={this.props.animalsLists}/>
+                <AnimalList animalsLists={this.props.animalsLists}
+                            handleGetImages={this.props.handleGetImages}/>
             </div>
         )
     }
@@ -33,7 +35,8 @@ class App extends React.Component{
                 amphibians : [],
                 insects : [],
                 arachnids : [],
-            }
+            },
+            chosenAnimal: null
         };
     }
 
@@ -70,6 +73,16 @@ class App extends React.Component{
         } else {
             return null;
         }
+    };
+    handleGetImages = (animal) => {
+        this.setState({
+            chosenAnimal: animal
+        })
+    };
+    handleCloseInfoBtn = () => {
+        this.setState({
+            chosenAnimal: null
+        })
     };
 
     handleClassifyAnimals = (list) => {
@@ -129,24 +142,25 @@ class App extends React.Component{
                 arachnids : arachnids,
             }
         });
-        console.log("ptaki", birds)
-        console.log("robale", insects)
-        console.log("płazy", amphibians)
-        console.log("ssaki", mammals)
-        console.log("pająki", arachnids)
-        console.log("gady", reptiles)
     };
     render(){
+        let infoBox;
+        if(this.state.chosenAnimal !== null){
+            infoBox = <InfoBox handleCloseInfoBtn={this.handleCloseInfoBtn} chosenAnimal={this.state.chosenAnimal}/>
+        }
         return (
             <div className={"mainContainer"}>
                 <Header />
                 <div className={"row"}>
                     <div className={"leftColumn"}>
+                        {infoBox}
                         <MapContainer onAnchorChange={this.handleAnchorChange} position={this.state.position}/>
                     </div>
                     <div className={"rightColumn"}>
                         <OptionContainer onButtonRadius={this.handleButtonRadius}
-                                         handleClassifyAnimals={this.handleClassifyAnimals} animalsLists={this.state.animalsLists}/>
+                                         handleClassifyAnimals={this.handleClassifyAnimals}
+                                         animalsLists={this.state.animalsLists}
+                                         handleGetImages={this.handleGetImages}/>
                     </div>
                 </div>
                 <Footer />

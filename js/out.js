@@ -10667,6 +10667,10 @@ var _list = __webpack_require__(209);
 
 var _list2 = _interopRequireDefault(_list);
 
+var _infoBox = __webpack_require__(212);
+
+var _infoBox2 = _interopRequireDefault(_infoBox);
+
 var _radiusButtons = __webpack_require__(210);
 
 var _radiusButtons2 = _interopRequireDefault(_radiusButtons);
@@ -10697,7 +10701,8 @@ var OptionContainer = function (_React$Component) {
                 'div',
                 null,
                 _react2.default.createElement(_radiusButtons2.default, { onButtonRadius: this.props.onButtonRadius }),
-                _react2.default.createElement(_list2.default, { animalsLists: this.props.animalsLists })
+                _react2.default.createElement(_list2.default, { animalsLists: this.props.animalsLists,
+                    handleGetImages: this.props.handleGetImages })
             );
         }
     }]);
@@ -10749,6 +10754,18 @@ var App = function (_React$Component2) {
             } else {
                 return null;
             }
+        };
+
+        _this2.handleGetImages = function (animal) {
+            _this2.setState({
+                chosenAnimal: animal
+            });
+        };
+
+        _this2.handleCloseInfoBtn = function () {
+            _this2.setState({
+                chosenAnimal: null
+            });
         };
 
         _this2.handleClassifyAnimals = function (list) {
@@ -10815,12 +10832,6 @@ var App = function (_React$Component2) {
                     arachnids: arachnids
                 }
             });
-            console.log("ptaki", birds);
-            console.log("robale", insects);
-            console.log("płazy", amphibians);
-            console.log("ssaki", mammals);
-            console.log("pająki", arachnids);
-            console.log("gady", reptiles);
         };
 
         _this2.state = {
@@ -10836,7 +10847,8 @@ var App = function (_React$Component2) {
                 amphibians: [],
                 insects: [],
                 arachnids: []
-            }
+            },
+            chosenAnimal: null
         };
         return _this2;
     }
@@ -10844,6 +10856,10 @@ var App = function (_React$Component2) {
     _createClass(App, [{
         key: 'render',
         value: function render() {
+            var infoBox = void 0;
+            if (this.state.chosenAnimal !== null) {
+                infoBox = _react2.default.createElement(_infoBox2.default, { handleCloseInfoBtn: this.handleCloseInfoBtn, chosenAnimal: this.state.chosenAnimal });
+            }
             return _react2.default.createElement(
                 'div',
                 { className: "mainContainer" },
@@ -10854,13 +10870,16 @@ var App = function (_React$Component2) {
                     _react2.default.createElement(
                         'div',
                         { className: "leftColumn" },
+                        infoBox,
                         _react2.default.createElement(_mapContainer2.default, { onAnchorChange: this.handleAnchorChange, position: this.state.position })
                     ),
                     _react2.default.createElement(
                         'div',
                         { className: "rightColumn" },
                         _react2.default.createElement(OptionContainer, { onButtonRadius: this.handleButtonRadius,
-                            handleClassifyAnimals: this.handleClassifyAnimals, animalsLists: this.state.animalsLists })
+                            handleClassifyAnimals: this.handleClassifyAnimals,
+                            animalsLists: this.state.animalsLists,
+                            handleGetImages: this.handleGetImages })
                     )
                 ),
                 _react2.default.createElement(_mainTemplate.Footer, null)
@@ -22532,7 +22551,7 @@ exports = module.exports = __webpack_require__(189)(false);
 
 
 // module
-exports.push([module.i, "svg {\n  height: 0;\n  width: 0; }\n\n@keyframes loader {\n  50% {\n    transform: translateY(-16 px);\n    background-color: #1b98e0; } }\n\n.loader > div:nth-child(1) {\n  animation-delay: 0.16s; }\n\n.loader > div:nth-child(2) {\n  animation-delay: 0.32s; }\n\n.loader > div:nth-child(3) {\n  animation-delay: 0.48s; }\n\n.loader > div:nth-child(4) {\n  animation-delay: 0.64s; }\n\n.loader > div:nth-child(5) {\n  animation-delay: 0.8s; }\n\n* {\n  margin: 0;\n  padding: 0; }\n\n.mainContainer {\n  font-family: 'Chelsea Market', cursive;\n  width: 99vw;\n  height: 100vh; }\n  .mainContainer .header {\n    background-color: #795548;\n    font-size: 40px;\n    height: 10vh; }\n  .mainContainer .row {\n    display: flex;\n    flex-direction: row;\n    font-size: 20px; }\n    .mainContainer .row .rightColumn {\n      overflow-y: scroll;\n      height: 87vh;\n      width: 30vw;\n      background-color: #D7CCC8; }\n      .mainContainer .row .rightColumn .listContainer {\n        padding: 10px; }\n      .mainContainer .row .rightColumn .buttonsDiv {\n        position: relative;\n        height: 100px;\n        background-color: #D7CCC8; }\n        .mainContainer .row .rightColumn .buttonsDiv .buttons {\n          position: fixed;\n          padding: 10px; }\n          .mainContainer .row .rightColumn .buttonsDiv .buttons .btn {\n            margin: 0 5px;\n            padding: 5px; }\n            .mainContainer .row .rightColumn .buttonsDiv .buttons .btn:first-child {\n              margin: 0 5px 0 0; }\n    .mainContainer .row .leftColumn {\n      width: 70vw;\n      height: 87vh; }\n      .mainContainer .row .leftColumn .loader {\n        filter: url(\"#goo\");\n        width: 100px;\n        margin: 0 auto;\n        position: relative;\n        top: 50vh;\n        transform: translateY(-10px); }\n        .mainContainer .row .leftColumn .loader > div {\n          float: left;\n          height: 20px;\n          width: 20px;\n          border-radius: 100%;\n          background-color: #006494;\n          animation: loader 0.8s infinite; }\n  .mainContainer .footer {\n    height: 3vh;\n    font-size: 20px;\n    background-color: #795548; }\n", ""]);
+exports.push([module.i, "svg {\n  height: 0;\n  width: 0; }\n\n@keyframes loader {\n  50% {\n    transform: translateY(-16 px);\n    background-color: #1b98e0; } }\n\n.loader > div:nth-child(1) {\n  animation-delay: 0.16s; }\n\n.loader > div:nth-child(2) {\n  animation-delay: 0.32s; }\n\n.loader > div:nth-child(3) {\n  animation-delay: 0.48s; }\n\n.loader > div:nth-child(4) {\n  animation-delay: 0.64s; }\n\n.loader > div:nth-child(5) {\n  animation-delay: 0.8s; }\n\n* {\n  margin: 0;\n  padding: 0; }\n\n.mainContainer {\n  font-family: 'Chelsea Market', cursive;\n  width: 99vw;\n  height: 100vh;\n  color: #212121; }\n  .mainContainer .header {\n    background-color: #795548;\n    font-size: 40px;\n    height: 10vh; }\n  .mainContainer .row {\n    display: flex;\n    flex-direction: row;\n    font-size: 20px; }\n    .mainContainer .row .rightColumn {\n      overflow-y: scroll;\n      height: 87vh;\n      width: 30vw;\n      background-color: #D7CCC8; }\n      .mainContainer .row .rightColumn .listContainer {\n        padding: 10px; }\n      .mainContainer .row .rightColumn .buttonsDiv {\n        position: relative;\n        height: 100px;\n        background-color: #D7CCC8; }\n        .mainContainer .row .rightColumn .buttonsDiv .buttons {\n          position: fixed;\n          padding: 10px; }\n          .mainContainer .row .rightColumn .buttonsDiv .buttons .btn {\n            margin: 0 5px;\n            padding: 5px; }\n            .mainContainer .row .rightColumn .buttonsDiv .buttons .btn:first-child {\n              margin: 0 5px 0 0; }\n    .mainContainer .row .leftColumn {\n      width: 70vw;\n      height: 87vh;\n      position: relative; }\n      .mainContainer .row .leftColumn .image {\n        position: absolute;\n        z-index: 999;\n        width: 100%;\n        height: 100%;\n        background-color: rgba(93, 64, 55, 0.6); }\n        .mainContainer .row .leftColumn .image button {\n          position: absolute;\n          top: 0;\n          right: 0;\n          font-size: 30px;\n          font-weight: 700;\n          line-height: 1;\n          padding: 0 5px;\n          color: #FF5722;\n          text-shadow: 0 1px 0 #fff;\n          filter: alpha(opacity=20);\n          opacity: .8; }\n        .mainContainer .row .leftColumn .image img {\n          margin: 0 auto;\n          display: block;\n          max-width: 100%;\n          height: 100%; }\n      .mainContainer .row .leftColumn .loader {\n        filter: url(\"#goo\");\n        width: 100px;\n        margin: 0 auto;\n        position: relative;\n        top: 50vh;\n        transform: translateY(-10px); }\n        .mainContainer .row .leftColumn .loader > div {\n          float: left;\n          height: 20px;\n          width: 20px;\n          border-radius: 100%;\n          background-color: #006494;\n          animation: loader 0.8s infinite; }\n  .mainContainer .footer {\n    height: 3vh;\n    font-size: 20px;\n    background-color: #795548; }\n", ""]);
 
 // exports
 
@@ -25280,15 +25299,14 @@ var AnimalList = function (_React$Component) {
             }
         };
 
-        _this.showImage = function () {
-            console.log("hee");
-        };
-
         _this.createLi = function (group) {
             return group.map(function (el, index) {
+                var showImage = function showImage() {
+                    _this.props.handleGetImages(el);
+                };
                 return _react2.default.createElement(
                     "li",
-                    { onClick: _this.showImage, key: index },
+                    { onClick: showImage, key: index },
                     el.name
                 );
             });
@@ -25501,6 +25519,75 @@ var Footer = exports.Footer = function (_React$Component2) {
 
     return Footer;
 }(_react2.default.Component);
+
+/***/ }),
+/* 212 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(10);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var InfoBox = function (_React$Component) {
+    _inherits(InfoBox, _React$Component);
+
+    function InfoBox() {
+        var _ref;
+
+        var _temp, _this, _ret;
+
+        _classCallCheck(this, InfoBox);
+
+        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+            args[_key] = arguments[_key];
+        }
+
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = InfoBox.__proto__ || Object.getPrototypeOf(InfoBox)).call.apply(_ref, [this].concat(args))), _this), _this.closeInfoBtn = function () {
+            _this.props.handleCloseInfoBtn();
+        }, _temp), _possibleConstructorReturn(_this, _ret);
+    }
+
+    _createClass(InfoBox, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                { className: "image" },
+                _react2.default.createElement("img", { src: this.props.chosenAnimal.img[0] }),
+                _react2.default.createElement(
+                    "button",
+                    { onClick: this.closeInfoBtn, type: "button", "aria-label": "Close" },
+                    _react2.default.createElement(
+                        "span",
+                        { "aria-hidden": "true" },
+                        "\xD7"
+                    )
+                )
+            );
+        }
+    }]);
+
+    return InfoBox;
+}(_react2.default.Component);
+
+exports.default = InfoBox;
 
 /***/ })
 /******/ ]);
