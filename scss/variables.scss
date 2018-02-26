@@ -1,0 +1,41 @@
+%mainFont{
+  font-family: 'Chelsea Market', cursive;
+}
+
+%boxShadow{
+  webkit-box-shadow: 0px 0px 6px 1px rgba(93,64,55,1);
+  -moz-box-shadow: 0px 0px 6px 1px rgba(93,64,55,1);
+  box-shadow: 0px 0px 6px 1px rgba(93,64,55,1);
+}
+
+$t: 0.8s;
+$d: $t / 5;
+
+$c1: #13293d;
+$c2: #006494;
+$c3: #1b98e0;
+
+$primary-color-dark:   #5D4037;
+$primary-color:        #795548;
+$primary-color-light:  #D7CCC8;
+$primary-color-text:   #FFFFFF;
+$accent-color:         #FF5722;
+$primary-text-color:   #212121;
+$secondary-text-color: #757575;
+$divider-color:        #BDBDBD;
+
+%buttons {
+  color: $primary-color-text;
+  text-decoration: none;
+  background-color: $primary-color;
+  border-bottom: 5px solid $primary-color-dark;
+  text-shadow: 0px -2px $primary-color-dark;
+  transition: all 0.1s;
+  -webkit-transition: all 0.1s;
+  border-radius: 10px;
+}
+%activeButtons{
+  transform: translate(0px,5px);
+  -webkit-transform: translate(0px,5px);
+  border-bottom: 1px solid;
+}
