@@ -7,7 +7,7 @@ export default class RadiusButtons extends React.Component{
     }
     btnChange = (e) =>{
         if(typeof this.props.onButtonRadius === "function"){
-            this.props.onButtonRadius(e.target.value);
+            this.props.onButtonRadius(e.target.dataset.value);
         }
     };
 
@@ -18,7 +18,7 @@ export default class RadiusButtons extends React.Component{
                     <span>Wybierz promień: </span>
                     <div className={"buttons"}>
                         {this.radius.map((el, index) => {
-                            return <button className={"btn"} key={index} onClick={this.btnChange} value={el}>{el} km</button>
+                            return <div className={"btn"} key={index} onClick={this.btnChange} data-value={el}>{el} km</div>
                         })}
                     </div>
                 </div>

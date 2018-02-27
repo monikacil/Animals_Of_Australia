@@ -53,8 +53,7 @@ export default class AnimalList extends React.Component{
 
     render(){
         return(
-            <div className={"list"}>
-                <h1>Choose a class:</h1>
+            <div className={"listContainer"}>
                 {this.createUl()}
             </div>
         )
