@@ -12,7 +12,6 @@ class OptionContainer extends React.Component{
         return(
             <div className={"listSection"}>
                 <RadiusButtons onButtonRadius={this.props.onButtonRadius}/>
-                <h1>Choose a class:</h1>
                 <AnimalList animalsLists={this.props.animalsLists}
                             handleGetImages={this.props.handleGetImages}/>
             </div>

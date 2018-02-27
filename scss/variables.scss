@@ -18,17 +18,6 @@ $primary-text-color:   #212121;
 $secondary-text-color: #757575;
 $divider-color:        #BDBDBD;
 
-//%buttons {
-//  color: $primary-color-text;
-//  text-decoration: none;
-//  background-color: $primary-color;
-//  border-bottom: 5px solid $primary-color-dark;
-//  text-shadow: 0px -2px $primary-color-dark;
-//  transition: all 0.1s;
-//  -webkit-transition: all 0.1s;
-//  border-radius: 10px;
-//}
-
 %buttons {
   position: relative;
   width: $cloud_size;
@@ -36,8 +25,11 @@ $divider-color:        #BDBDBD;
   border-radius: 50%;
   background-color: white;
   color: $primary-color;
-  transition: background-color 100ms linear, height 70ms ease-in, width 70ms ease-in;
+  transition: all 0.5s;
   cursor: pointer;
+  &:hover{
+    transform: scale(1.1);
+  }
   &::before,
   &::after {
     content: "";
@@ -73,7 +65,7 @@ $divider-color:        #BDBDBD;
   }
 }
 %activeButtons{
-  transform: translate(0px,5px);
-  -webkit-transform: translate(0px,5px);
+  transform: translate(0px,2px);
+  -webkit-transform: translate(0px,2px);
   border-bottom: 1px solid $primary-color;
 }

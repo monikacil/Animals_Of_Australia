@@ -44,8 +44,8 @@ export default class AnimalList extends React.Component{
             if(this.state.dataAnimals.indexOf(index) !== -1) {
                 liElements = this.createLi(el.group)
             }
-            return (<ul key={index} data-group={index} onClick={this.showList}>
-                {el.name} [{el.group.length}]
+            return (<ul key={index}>
+                <p data-group={index} onClick={this.showList}>{el.name} [{el.group.length}]</p>
                 {liElements}
             </ul>)
         })
@@ -53,8 +53,11 @@ export default class AnimalList extends React.Component{
 
     render(){
         return(
-            <div className={"listContainer"}>
-                {this.createUl()}
+            <div className={"list"}>
+                <h1>Choose a class:</h1>
+                <div className={"listContainer"}>
+                    {this.createUl()}
+                </div>
             </div>
         )
     }
