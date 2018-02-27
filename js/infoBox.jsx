@@ -8,8 +8,8 @@ export default class InfoBox extends React.Component{
         return (
             <div className={"image"}>
                 <img src={this.props.chosenAnimal.img[0]} />
-                <button onClick={this.closeInfoBtn} type="button" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button onClick={this.closeInfoBtn} type="button">
+                    <span>&times;</span>
                 </button>
             </div>
         )
