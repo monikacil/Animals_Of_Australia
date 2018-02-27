@@ -20,7 +20,7 @@
     "webpack-dev-server": "^2.11.1"
   },
   "devDependencies": {
-    "css-loader": "^0.28.9",
+    "css-loader": "^0.28.10",
     "node-sass": "^4.7.2",
     "sass-loader": "^6.0.6",
     "style-loader": "^0.20.2",

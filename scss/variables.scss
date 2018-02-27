@@ -7,6 +7,7 @@
   -moz-box-shadow: 0px 0px 6px 1px rgba(93,64,55,1);
   box-shadow: 0px 0px 6px 1px rgba(93,64,55,1);
 }
+$cloud_size: 40px;
 
 $primary-color-dark:   #5D4037;
 $primary-color:        #795548;
@@ -17,15 +18,59 @@ $primary-text-color:   #212121;
 $secondary-text-color: #757575;
 $divider-color:        #BDBDBD;
 
+//%buttons {
+//  color: $primary-color-text;
+//  text-decoration: none;
+//  background-color: $primary-color;
+//  border-bottom: 5px solid $primary-color-dark;
+//  text-shadow: 0px -2px $primary-color-dark;
+//  transition: all 0.1s;
+//  -webkit-transition: all 0.1s;
+//  border-radius: 10px;
+//}
+
 %buttons {
-  color: $primary-color-text;
-  text-decoration: none;
-  background-color: $primary-color;
-  border-bottom: 5px solid $primary-color-dark;
-  text-shadow: 0px -2px $primary-color-dark;
-  transition: all 0.1s;
-  -webkit-transition: all 0.1s;
-  border-radius: 10px;
+  position: relative;
+  width: $cloud_size;
+  height: $cloud_size;
+  border-radius: 50%;
+  background-color: white;
+  color: $primary-color;
+  transition: background-color 100ms linear, height 70ms ease-in, width 70ms ease-in;
+  cursor: pointer;
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    width: $cloud_size - 10px;
+    height: $cloud_size - 10px;
+    position: absolute;
+    top: $cloud_size / 8;
+    background-color: inherit;
+    border-radius: inherit;
+  }
+  &::before {
+    left: -100%;
+    margin-left: calc((#{$cloud_size} / 2));
+  }
+  &::after {
+    right: -100%;
+    margin-right: calc((#{$cloud_size} / 2));
+
+  }
+  &:active {
+    background-color: #ECE9E6;
+  }
+  span{
+    position: absolute;
+    z-index: 3;
+    width: 200%;
+    left: -50%;
+    text-align: center;
+    top: 45%;
+    margin-top: -0.5em;
+    font-size: $cloud_size / 2;
+  }
 }
 %activeButtons{
   transform: translate(0px,5px);

@@ -10840,7 +10840,7 @@ var App = function (_React$Component2) {
         };
 
         _this2.state = {
-            radius: "20",
+            radius: "10",
             position: {
                 latitude: null,
                 longitude: null
@@ -22556,7 +22556,7 @@ exports = module.exports = __webpack_require__(189)(false);
 
 
 // module
-exports.push([module.i, ".mainContainer {\n  font-family: 'Chelsea Market', cursive; }\n\n.mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn {\n  color: #FFFFFF;\n  text-decoration: none;\n  background-color: #795548;\n  border-bottom: 5px solid #5D4037;\n  text-shadow: 0px -2px #5D4037;\n  transition: all 0.1s;\n  -webkit-transition: all 0.1s;\n  border-radius: 10px; }\n\n.mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn:active {\n  transform: translate(0px, 5px);\n  -webkit-transform: translate(0px, 5px);\n  border-bottom: 1px solid #795548; }\n\n* {\n  margin: 0;\n  padding: 0; }\n\n.mainContainer {\n  width: 100vw;\n  height: 100vh; }\n  .mainContainer .header {\n    display: flex;\n    align-items: center;\n    background-color: #795548;\n    color: #FFFFFF;\n    font-size: 40px;\n    height: 11vh; }\n  .mainContainer .row {\n    display: flex;\n    flex-direction: row;\n    margin-right: 0;\n    margin-left: 0;\n    width: 100vw;\n    font-size: 20px; }\n    .mainContainer .row .rightColumn {\n      width: 30vw;\n      background-color: #D7CCC8; }\n      .mainContainer .row .rightColumn .listSection {\n        height: 100%; }\n        .mainContainer .row .rightColumn .listSection .listContainer {\n          padding: 10px;\n          height: 65vh;\n          overflow-y: auto; }\n        .mainContainer .row .rightColumn .listSection .buttonsDiv {\n          position: relative;\n          height: 100px;\n          background-color: #D7CCC8; }\n          .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons {\n            padding: 10px; }\n            .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn {\n              margin: 0 5px;\n              padding: 5px; }\n              .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn:hover {\n                color: #FF5722; }\n    .mainContainer .row .leftColumn {\n      width: 70vw;\n      height: 87vh;\n      position: relative; }\n      .mainContainer .row .leftColumn .image {\n        position: absolute;\n        z-index: 999;\n        width: 100%;\n        height: 100%;\n        background-color: rgba(93, 64, 55, 0.6); }\n        .mainContainer .row .leftColumn .image button {\n          position: absolute;\n          top: 0;\n          right: 0;\n          font-size: 30px;\n          font-weight: 700;\n          line-height: 1;\n          padding: 0 5px;\n          color: #FF5722;\n          text-shadow: 0 1px 0 #fff;\n          filter: alpha(opacity=20);\n          opacity: .8; }\n        .mainContainer .row .leftColumn .image img {\n          margin: 0 auto;\n          display: block;\n          max-width: 100%;\n          height: 100%; }\n  .mainContainer .footer {\n    font-size: 10px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    background-color: #795548;\n    color: #FFFFFF; }\n    .mainContainer .footer a {\n      color: #FFFFFF; }\n", ""]);
+exports.push([module.i, ".mainContainer {\n  font-family: 'Chelsea Market', cursive; }\n\n.mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn {\n  position: relative;\n  width: 40px;\n  height: 40px;\n  border-radius: 50%;\n  background-color: white;\n  color: #795548;\n  transition: background-color 100ms linear, height 70ms ease-in, width 70ms ease-in;\n  cursor: pointer; }\n  .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn::before, .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn::after {\n    content: \"\";\n    display: block;\n    width: 30px;\n    height: 30px;\n    position: absolute;\n    top: 5px;\n    background-color: inherit;\n    border-radius: inherit; }\n  .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn::before {\n    left: -100%;\n    margin-left: calc((40px / 2)); }\n  .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn::after {\n    right: -100%;\n    margin-right: calc((40px / 2)); }\n  .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn:active {\n    background-color: #ECE9E6; }\n  .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn span {\n    position: absolute;\n    z-index: 3;\n    width: 200%;\n    left: -50%;\n    text-align: center;\n    top: 45%;\n    margin-top: -0.5em;\n    font-size: 20px; }\n\n.mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn:active {\n  transform: translate(0px, 5px);\n  -webkit-transform: translate(0px, 5px);\n  border-bottom: 1px solid #795548; }\n\n* {\n  margin: 0;\n  padding: 0; }\n\n.mainContainer {\n  width: 100vw;\n  height: 100vh;\n  background-image: url(\"http://bi.gazeta.pl/im/9/11023/z11023639IH,Outback-Australia---fot--Shutterstock.jpg\");\n  background-size: cover; }\n  .mainContainer .header {\n    display: flex;\n    align-items: center;\n    color: #FFFFFF;\n    font-size: 40px;\n    height: 11vh;\n    padding-left: 20px; }\n  .mainContainer .row {\n    display: flex;\n    flex-direction: row;\n    height: 85vh;\n    margin-right: 0;\n    margin-left: 0;\n    width: 100vw;\n    font-size: 20px;\n    color: #FFFFFF; }\n    .mainContainer .row .rightColumn {\n      width: 30vw;\n      display: flex;\n      flex-direction: column;\n      align-items: center;\n      padding-left: 10px; }\n      .mainContainer .row .rightColumn .listSection {\n        height: 100%;\n        width: 80%;\n        margin-left: 30px;\n        text-align: center; }\n        .mainContainer .row .rightColumn .listSection .listContainer {\n          padding: 10px;\n          height: 60vh;\n          overflow-y: auto;\n          background-color: rgba(121, 85, 72, 0.6);\n          border-radius: 10px;\n          display: flex;\n          flex-direction: column; }\n          .mainContainer .row .rightColumn .listSection .listContainer ul {\n            font-size: 25px; }\n            .mainContainer .row .rightColumn .listSection .listContainer ul li {\n              font-size: 18px; }\n        .mainContainer .row .rightColumn .listSection .buttonsDiv {\n          position: relative;\n          height: 100px; }\n          .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons {\n            padding: 10px;\n            text-align: center; }\n            .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn {\n              margin: 5px 20px; }\n              .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn:hover {\n                color: #FF5722; }\n        .mainContainer .row .rightColumn .listSection h1 {\n          margin-top: 30px; }\n    .mainContainer .row .leftColumn {\n      width: 70vw;\n      height: 87vh;\n      position: relative;\n      padding-left: 35px; }\n      .mainContainer .row .leftColumn .image {\n        position: absolute;\n        z-index: 999;\n        width: 100%;\n        height: 85vh;\n        background-color: rgba(93, 64, 55, 0.6); }\n        .mainContainer .row .leftColumn .image button {\n          position: absolute;\n          top: 0;\n          right: 0;\n          font-size: 30px;\n          font-weight: 700;\n          line-height: 1;\n          padding: 0 5px;\n          color: #FF5722;\n          text-shadow: 0 1px 0 #fff;\n          filter: alpha(opacity=20);\n          opacity: .8; }\n        .mainContainer .row .leftColumn .image img {\n          margin: 0 auto;\n          display: block;\n          max-width: 100%;\n          height: 100%; }\n  .mainContainer .footer {\n    font-size: 13px;\n    height: 4vh;\n    display: flex;\n    align-items: flex-end;\n    justify-content: center;\n    color: #FFFFFF; }\n    .mainContainer .footer a {\n      color: #FFFFFF; }\n", ""]);
 
 // exports
 
@@ -23150,8 +23150,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var style = {
     width: '70vw',
-    height: '87vh',
-    position: 'relative'
+    height: '85vh',
+    position: 'relative',
+    borderRadius: "10px"
 };
 
 var containerStyle = {
@@ -25484,7 +25485,7 @@ var RadiusButtons = function (_React$Component) {
                     _react2.default.createElement(
                         "span",
                         null,
-                        "Wybierz promie\u0144: "
+                        "Select radius: "
                     ),
                     _react2.default.createElement(
                         "div",
@@ -25492,9 +25493,13 @@ var RadiusButtons = function (_React$Component) {
                         this.radius.map(function (el, index) {
                             return _react2.default.createElement(
                                 "div",
-                                { className: "btn", key: index, onClick: _this2.btnChange, "data-value": el },
-                                el,
-                                " km"
+                                { className: "btn", key: index },
+                                _react2.default.createElement(
+                                    "span",
+                                    { onClick: _this2.btnChange, "data-value": el },
+                                    el,
+                                    " km"
+                                )
                             );
                         })
                     )

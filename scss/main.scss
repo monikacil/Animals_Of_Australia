@@ -9,42 +9,60 @@
   @extend %mainFont;
   width: 100vw;
   height: 100vh;
+  background-image: url("http://bi.gazeta.pl/im/9/11023/z11023639IH,Outback-Australia---fot--Shutterstock.jpg");
+  background-size: cover;
   .header{
     display: flex;
     align-items: center;
-    background-color: $primary-color;
     color: $primary-color-text;
     font-size: 40px;
     height: 11vh;
-
+    padding-left: 20px;
   }
   .row{
     display: flex;
     flex-direction: row;
+    height: 85vh;
     margin-right: 0;
     margin-left: 0;
     width: 100vw;
     font-size: 20px;
+    color:  $primary-color-text;
     .rightColumn{
       width: 30vw;
-      background-color: $primary-color-light;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-left: 10px;
       .listSection{
         height: 100%;
+        width: 80%;
+        margin-left: 30px;
+        text-align: center;
         .listContainer{
           padding: 10px;
-          height: 65vh;
+          height: 60vh;
           overflow-y: auto;
+          background-color: rgba(121,85,72, 0.6);
+          border-radius: 10px;
+          display: flex;
+          flex-direction: column;
+          ul{
+            font-size: 25px;
+            li{
+              font-size: 18px;
+            }
+          }
         }
         .buttonsDiv{
           position: relative;
           height: 100px;
-          background-color: $primary-color-light;
           .buttons{
             padding: 10px;
+            text-align: center;
             .btn{
               @extend %buttons;
-              margin: 0 5px;
-              padding: 5px;
+              margin: 5px 20px;
               &:hover{
                 color: $accent-color;
               }
@@ -54,17 +72,21 @@
             }
           }
         }
+        h1{
+          margin-top: 30px;
+        }
       }
     }
     .leftColumn{
       width: 70vw;
       height: 87vh;
       position: relative;
+      padding-left: 35px;
       .image{
         position: absolute;
         z-index: 999;
         width: 100%;
-        height: 100%;
+        height: 85vh;
         background-color: rgba(93, 64, 55, 0.6);
         button{
           position: absolute;
@@ -89,11 +111,11 @@
     }
   }
   .footer{
-    font-size: 10px;
+    font-size: 13px;
+    height: 4vh;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
-    background-color: $primary-color;
     color: $primary-color-text;
     a{
       color: $primary-color-text;

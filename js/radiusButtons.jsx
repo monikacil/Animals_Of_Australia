@@ -15,10 +15,10 @@ export default class RadiusButtons extends React.Component{
         return (
             <div className={"buttonsDiv"}>
                 <div className={"buttons"}>
-                    <span>Wybierz promień: </span>
+                    <span>Select radius: </span>
                     <div className={"buttons"}>
                         {this.radius.map((el, index) => {
-                            return <div className={"btn"} key={index} onClick={this.btnChange} data-value={el}>{el} km</div>
+                            return <div className={"btn"} key={index}><span onClick={this.btnChange} data-value={el}>{el} km</span></div>
                         })}
                     </div>
                 </div>
