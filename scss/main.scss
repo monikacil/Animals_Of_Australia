@@ -6,6 +6,7 @@
   padding: 0;
 }
 .mainContainer{
+  text-shadow: $textShadow;
   @extend %mainFont;
   width: 100vw;
   height: 100vh;
@@ -34,6 +35,7 @@
       flex-direction: column;
       align-items: center;
       .listSection{
+        color: $primary-color-text;
         height: 100%;
         width: 80%;
         margin-left: 2vw;
@@ -41,13 +43,21 @@
         .list{
           height: 70%;
           margin-top: 40px;
+          .loader{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          }
           h1{
             font-size: 2.2rem;
             margin: 1.2vw 0;
             text-align: center;
           }
           .instruction{
-            background-color: rgba(121,85,72, 0.5);
+            background-color: $backgroundColorOfList;
+            box-shadow: 0 0 8px 0 rgba(93,64,55,1);
             border-radius: 10px;
             padding: 5px 0 20px 0;
             text-align: left;
@@ -62,8 +72,9 @@
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            background-color: rgba(121,85,72, 0.5);
+            background-color: $backgroundColorOfList;
             border-radius: 10px;
+            box-shadow: 0 0 8px 0 rgba(93,64,55,1);
             &::-webkit-scrollbar-track {
               -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
               border-radius: 10px;
@@ -115,6 +126,7 @@
             .btn{
               @extend %buttons;
               margin: 3px 20px;
+              text-shadow: none;
               &:hover{
                 color: #083040;
               }
@@ -124,6 +136,7 @@
             }
             .activeBtn{
               background-color: #D5E1E6;
+              box-shadow: 1px 1px 8px 0 rgba(213,225,230,1);
               color: #083040;
               transform: scale(1.1);
             }
@@ -141,7 +154,7 @@
         z-index: 999;
         width: 100%;
         height: 85vh;
-        background-color: rgba(93, 64, 55, 0.6);
+        background-color: $backgroundColorOfList;
         button{
           position: absolute;
           top: 5px;

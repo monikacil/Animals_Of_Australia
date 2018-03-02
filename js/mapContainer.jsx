@@ -5,7 +5,8 @@ const style = {
     width: '70vw',
     height: '85vh',
     position: 'relative',
-    borderRadius: "10px"
+    borderRadius: "10px",
+    boxShadow: "0px 2px 10px 0px rgba(0,0,0,1)"
 };
 
 const containerStyle = {
