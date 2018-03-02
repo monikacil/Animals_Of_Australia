@@ -64,9 +64,13 @@ class App extends React.Component{
     handleButtonRadius = (radius) =>{
         this.setState({
             radius: radius,
-            status: "waiting"
         });
-        this.getData(this.state.position.latitude, this.state.position.longitude, radius);
+        if(this.state.position.longitude !== null & this.state.position.latitude !== null) {
+            this.setState({
+                status: "waiting"
+            });
+            this.getData(this.state.position.latitude, this.state.position.longitude, radius);
+        }
     };
     getNameOfGroups = (obj) =>{
         if (obj.vernacularName) {

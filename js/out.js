@@ -10742,10 +10742,14 @@ var App = function (_React$Component2) {
 
         _this2.handleButtonRadius = function (radius) {
             _this2.setState({
-                radius: radius,
-                status: "waiting"
+                radius: radius
             });
-            _this2.getData(_this2.state.position.latitude, _this2.state.position.longitude, radius);
+            if (_this2.state.position.longitude !== null & _this2.state.position.latitude !== null) {
+                _this2.setState({
+                    status: "waiting"
+                });
+                _this2.getData(_this2.state.position.latitude, _this2.state.position.longitude, radius);
+            }
         };
 
         _this2.getNameOfGroups = function (obj) {
@@ -25341,41 +25345,37 @@ var AnimalList = function (_React$Component) {
                     "div",
                     { className: "list" },
                     _react2.default.createElement(
-                        "p",
-                        null,
+                        "ol",
+                        { className: "instruction" },
                         _react2.default.createElement(
-                            "ol",
-                            { className: "instruction" },
-                            _react2.default.createElement(
-                                "h1",
-                                null,
-                                "How to use it?"
-                            ),
-                            _react2.default.createElement(
-                                "li",
-                                null,
-                                "Click on the map to select area."
-                            ),
-                            _react2.default.createElement(
-                                "li",
-                                null,
-                                "Wait until list of animals groups is loaded."
-                            ),
-                            _react2.default.createElement(
-                                "li",
-                                null,
-                                "Expand the list to see all the species."
-                            ),
-                            _react2.default.createElement(
-                                "li",
-                                null,
-                                "Click on the species to see the foto."
-                            ),
-                            _react2.default.createElement(
-                                "li",
-                                null,
-                                "Choose radius of area (buttons with kilometers)."
-                            )
+                            "h1",
+                            null,
+                            "How to use it?"
+                        ),
+                        _react2.default.createElement(
+                            "li",
+                            null,
+                            "Click on the map to select area."
+                        ),
+                        _react2.default.createElement(
+                            "li",
+                            null,
+                            "Wait until list of animals groups is loaded."
+                        ),
+                        _react2.default.createElement(
+                            "li",
+                            null,
+                            "Expand the list to see all the species."
+                        ),
+                        _react2.default.createElement(
+                            "li",
+                            null,
+                            "Click on the species to see the foto."
+                        ),
+                        _react2.default.createElement(
+                            "li",
+                            null,
+                            "Choose radius of area (buttons with kilometers)."
                         )
                     )
                 );

@@ -55,15 +55,13 @@ export default class AnimalList extends React.Component{
         if(this.props.appState === "start"){
             return (
                 <div className={"list"}>
-                    <p>
-                        <ol className={"instruction"}><h1>How to use it?</h1>
-                            <li>Click on the map to select area.</li>
-                            <li>Wait until list of animals groups is loaded.</li>
-                            <li>Expand the list to see all the species.</li>
-                            <li>Click on the species to see the foto.</li>
-                            <li>Choose radius of area (buttons with kilometers).</li>
-                        </ol>
-                    </p>
+                    <ol className={"instruction"}><h1>How to use it?</h1>
+                        <li>Click on the map to select area.</li>
+                        <li>Wait until list of animals groups is loaded.</li>
+                        <li>Expand the list to see all the species.</li>
+                        <li>Click on the species to see the foto.</li>
+                        <li>Choose radius of area (buttons with kilometers).</li>
+                    </ol>
                 </div>
             )
         } else if(this.props.appState === "waiting"){
