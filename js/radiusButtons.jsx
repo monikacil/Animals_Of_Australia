@@ -3,7 +3,7 @@ import React from 'react';
 export default class RadiusButtons extends React.Component{
     constructor(props){
         super(props);
-        this.radius = ["10", "30", "50", "100"];
+        this.radius = ["50", "100", "150", "200"];
     }
     btnChange = (e) =>{
         if(typeof this.props.onButtonRadius === "function"){

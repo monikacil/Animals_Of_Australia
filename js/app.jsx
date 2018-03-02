@@ -25,7 +25,7 @@ class App extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            radius: "10",
+            radius: "50",
             position : {
                 latitude: null,
                 longitude: null
