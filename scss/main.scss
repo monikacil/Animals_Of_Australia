@@ -14,8 +14,8 @@
   padding-left: 2vw;
 }
 .mainContainer{
+  font-family: 'Chelsea Market', cursive;
   text-shadow: $textShadow;
-  @extend %mainFont;
   width: 100vw;
   height: 100vh;
   background-image: url("http://bi.gazeta.pl/im/9/11023/z11023639IH,Outback-Australia---fot--Shutterstock.jpg");
@@ -89,14 +89,60 @@
     text-align: center;
     margin-top: 1vh;
     .btn {
-      @extend %buttons;
+      position: relative;
+      width: $cloud_size;
+      height: $cloud_size;
+      border-radius: 50%;
+      background-color: $primary-color-text;
+      box-shadow: 1px 1px 8px 0px rgba(255,255,255,1);
+      color: $primary-color;
+      transition: all 0.5s;
+      cursor: pointer;
+      &:hover{
+        transform: scale(1.1);
+      }
+      &::before,
+      &::after {
+        content: "";
+        display: block;
+        width: $cloud_size - 10px;
+        height: $cloud_size - 10px;
+        position: absolute;
+        top: $cloud_size / 8;
+        background-color: inherit;
+        box-shadow: inherit;
+        border-radius: inherit;
+      }
+      &::before {
+        left: -100%;
+        margin-left: calc((#{$cloud_size} / 2));
+      }
+      &::after {
+        right: -100%;
+        margin-right: calc((#{$cloud_size} / 2));
+
+      }
+      &:active {
+        background-color: #ECE9E6;
+      }
+      span{
+        position: absolute;
+        z-index: 3;
+        width: 200%;
+        left: -50%;
+        text-align: center;
+        top: 45%;
+        margin-top: -0.5em;
+        font-size: $cloud_size / 2.3;
+      }
       margin: 3px 20px;
       text-shadow: none;
       &:hover {
         color: #083040;
       }
       &:active {
-        @extend %activeButtons;
+        transform: translate(0px,2px);
+        border-bottom: 1px solid $primary-color;
       }
     }
     .activeBtn{
