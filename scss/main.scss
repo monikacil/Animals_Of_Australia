@@ -5,6 +5,14 @@
   margin: 0;
   padding: 0;
 }
+.header{
+  display: flex;
+  align-items: center;
+  color: $primary-color-text;
+  font-size: 40px;
+  height: 11vh;
+  padding-left: 2vw;
+}
 .mainContainer{
   text-shadow: $textShadow;
   @extend %mainFont;
@@ -12,14 +20,6 @@
   height: 100vh;
   background-image: url("http://bi.gazeta.pl/im/9/11023/z11023639IH,Outback-Australia---fot--Shutterstock.jpg");
   background-size: cover;
-  .header{
-    display: flex;
-    align-items: center;
-    color: $primary-color-text;
-    font-size: 40px;
-    height: 11vh;
-    padding-left: 2vw;
-  }
   .row{
     display: flex;
     flex-direction: row;
@@ -34,147 +34,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      .listSection{
-        color: $primary-color-text;
-        height: 100%;
-        width: 80%;
-        margin-left: 2vw;
-        text-align: center;
-        .list{
-          height: 70%;
-          margin-top: 40px;
-          .loader{
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-          }
-          h1{
-            font-size: 2.2rem;
-            margin: 1.2vw 0;
-            text-align: center;
-          }
-          .instruction{
-            background-color: $backgroundColorOfList;
-            box-shadow: 0 0 8px 0 rgba(93,64,55,1);
-            border-radius: 10px;
-            padding: 5px 0 20px 0;
-            text-align: left;
-            li {
-              margin: 0 5px 0 30px;
-            }
-          }
-          .listContainer{
-            padding: 2vw 1vw 1vw 1vw;
-            max-height: 60vh;
-            overflow-y: auto;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-            background-color: $backgroundColorOfList;
-            border-radius: 10px;
-            box-shadow: 0 0 8px 0 rgba(93,64,55,1);
-            &::-webkit-scrollbar-track {
-              -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-              border-radius: 10px;
-              background-color: rgba(205, 175, 164, 0.4);
-            }
-            &::-webkit-scrollbar {
-              width: 12px;
-              border-radius: 10px;
-              background-color: rgba(205, 175, 164, 0.4);
-            }
-            &::-webkit-scrollbar-thumb {
-              border-radius: 10px;
-              -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-              background-color: rgba(121, 85, 72, 0.5);
-            }
-            ul{
-              p{
-                color: $primary-color-light;
-                font-size: 25px;
-                cursor: pointer;
-                transition: transform 0.5s;
-                margin-bottom: 0;
-                &:hover {
-                  transform: scale(1.1);
-                  color: $primary-color-text;
-                }
-              }
-              li{
-                font-size: 18px;
-                list-style-type: none;
-                cursor: pointer;
-                transition: 0.3s;
-                text-transform: capitalize;
-                &:hover{
-                  color: $accent-color;
-                }
-              }
-            }
-          }
-        }
-        .buttonsDiv{
-          position: relative;
-          span{
-            font-size: 25px;
-          }
-          .buttons{
-            text-align: center;
-            margin-top: 1vh;
-            .btn{
-              @extend %buttons;
-              margin: 3px 20px;
-              text-shadow: none;
-              &:hover{
-                color: #083040;
-              }
-              &:active{
-                @extend %activeButtons;
-              }
-            }
-            .activeBtn{
-              background-color: #D5E1E6;
-              box-shadow: 1px 1px 8px 0 rgba(213,225,230,1);
-              color: #083040;
-              transform: scale(1.1);
-            }
-          }
-        }
-      }
     }
     .leftColumn{
       width: 70vw;
       height: 87vh;
       position: relative;
       padding-left: 2vw;
-      .image{
-        position: absolute;
-        z-index: 999;
-        width: 100%;
-        height: 85vh;
-        background-color: $backgroundColorOfList;
-        button{
-          position: absolute;
-          top: 5px;
-          right: 5px;
-          font-size: 30px;
-          font-weight: 700;
-          line-height: 1;
-          padding: 0 1vw;
-          color: #FF5722;
-          text-shadow: 0 1px 0 #fff;
-          filter: alpha(opacity=20);
-          opacity: 0.8;
-        }
-        img{
-          margin: 0 auto;
-          display: block;
-          max-width: 100%;
-          height: 100%;
-        }
-      }
     }
   }
   .footer{
@@ -186,6 +51,141 @@
     color: $primary-color-text;
     a{
       color: $primary-color-text;
+    }
+  }
+}
+.image{
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  height: 85vh;
+  background-color: $backgroundColorOfList;
+  button{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0 1vw;
+    color: #FF5722;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: 0.8;
+  }
+  img{
+    margin: 0 auto;
+    display: block;
+    max-width: 100%;
+    height: 100%;
+  }
+}
+.buttonsDiv {
+  position: relative;
+  span {
+    font-size: 25px;
+  }
+  .buttons {
+    text-align: center;
+    margin-top: 1vh;
+    .btn {
+      @extend %buttons;
+      margin: 3px 20px;
+      text-shadow: none;
+      &:hover {
+        color: #083040;
+      }
+      &:active {
+        @extend %activeButtons;
+      }
+    }
+    .activeBtn{
+      background-color: #D5E1E6;
+      box-shadow: 1px 1px 8px 0 rgba(213,225,230,1);
+      color: #083040;
+      transform: scale(1.1);
+    }
+  }
+}
+.listSection {
+  color: $primary-color-text;
+  height: 100%;
+  width: 80%;
+  margin-left: 2vw;
+  text-align: center;
+  .list {
+    height: 70%;
+    margin-top: 40px;
+    .loader {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+      font-size: 2.2rem;
+      margin: 1.2vw 0;
+      text-align: center;
+    }
+    .instruction {
+      background-color: $backgroundColorOfList;
+      box-shadow: 0 0 8px 0 rgba(93, 64, 55, 1);
+      border-radius: 10px;
+      padding: 5px 0 20px 0;
+      text-align: left;
+      li {
+        margin: 0 5px 0 30px;
+      }
+    }
+  }
+}
+.listContainer {
+  padding: 2vw 1vw 1vw 1vw;
+  max-height: 60vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: $backgroundColorOfList;
+  border-radius: 10px;
+  box-shadow: 0 0 8px 0 rgba(93, 64, 55, 1);
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: rgba(205, 175, 164, 0.4);
+  }
+  &::-webkit-scrollbar {
+    width: 12px;
+    border-radius: 10px;
+    background-color: rgba(205, 175, 164, 0.4);
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: rgba(121, 85, 72, 0.5);
+  }
+  ul {
+    p {
+      color: $primary-color-light;
+      font-size: 25px;
+      cursor: pointer;
+      transition: transform 0.5s;
+      margin-bottom: 0;
+      &:hover {
+        transform: scale(1.1);
+        color: $primary-color-text;
+      }
+    }
+    li {
+      font-size: 18px;
+      list-style-type: none;
+      cursor: pointer;
+      transition: 0.3s;
+      text-transform: capitalize;
+      &:hover {
+        color: $accent-color;
+      }
     }
   }
 }
