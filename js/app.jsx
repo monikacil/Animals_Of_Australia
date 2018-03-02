@@ -13,7 +13,8 @@ class OptionContainer extends React.Component{
             <div className={"listSection"}>
                 <RadiusButtons onButtonRadius={this.props.onButtonRadius}/>
                 <AnimalList animalsLists={this.props.animalsLists}
-                            handleGetImages={this.props.handleGetImages}/>
+                            handleGetImages={this.props.handleGetImages}
+                            appState={this.props.appState}/>
             </div>
         )
     }
@@ -36,7 +37,8 @@ class App extends React.Component{
                 insects : [],
                 arachnids : [],
             },
-            chosenAnimal: null
+            chosenAnimal: null,
+            status: "start"
         };
     }
 
@@ -45,7 +47,8 @@ class App extends React.Component{
             position:{
                 latitude: latitude,
                 longitude: longitude
-            }
+            },
+            status: "waiting"
         });
         this.getData(latitude, longitude, this.state.radius);
     };
@@ -54,12 +57,14 @@ class App extends React.Component{
         fetch(apiAdress)
             .then(r => r.json())
             .then( data => {
+                this.setState({status: "done"});
                 this.handleClassifyAnimals(data.occurrences)
             });
     };
     handleButtonRadius = (radius) =>{
         this.setState({
-            radius: radius
+            radius: radius,
+            status: "waiting"
         });
         this.getData(this.state.position.latitude, this.state.position.longitude, radius);
     };
@@ -154,13 +159,15 @@ class App extends React.Component{
                 <div className={"row"}>
                     <div className={"leftColumn"}>
                         {infoBox}
-                        <MapContainer onAnchorChange={this.handleAnchorChange} position={this.state.position}/>
+                        <MapContainer onAnchorChange={this.handleAnchorChange}
+                                      position={this.state.position}/>
                     </div>
                     <div className={"rightColumn"}>
                         <OptionContainer onButtonRadius={this.handleButtonRadius}
                                          handleClassifyAnimals={this.handleClassifyAnimals}
                                          animalsLists={this.state.animalsLists}
-                                         handleGetImages={this.handleGetImages}/>
+                                         handleGetImages={this.handleGetImages}
+                                         appState={this.state.status}/>
                     </div>
                 </div>
                 <Footer />

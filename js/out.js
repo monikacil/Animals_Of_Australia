@@ -10702,7 +10702,8 @@ var OptionContainer = function (_React$Component) {
                 { className: "listSection" },
                 _react2.default.createElement(_radiusButtons2.default, { onButtonRadius: this.props.onButtonRadius }),
                 _react2.default.createElement(_list2.default, { animalsLists: this.props.animalsLists,
-                    handleGetImages: this.props.handleGetImages })
+                    handleGetImages: this.props.handleGetImages,
+                    appState: this.props.appState })
             );
         }
     }]);
@@ -10723,7 +10724,8 @@ var App = function (_React$Component2) {
                 position: {
                     latitude: latitude,
                     longitude: longitude
-                }
+                },
+                status: "waiting"
             });
             _this2.getData(latitude, longitude, _this2.state.radius);
         };
@@ -10733,13 +10735,15 @@ var App = function (_React$Component2) {
             fetch(apiAdress).then(function (r) {
                 return r.json();
             }).then(function (data) {
+                _this2.setState({ status: "done" });
                 _this2.handleClassifyAnimals(data.occurrences);
             });
         };
 
         _this2.handleButtonRadius = function (radius) {
             _this2.setState({
-                radius: radius
+                radius: radius,
+                status: "waiting"
             });
             _this2.getData(_this2.state.position.latitude, _this2.state.position.longitude, radius);
         };
@@ -10848,7 +10852,8 @@ var App = function (_React$Component2) {
                 insects: [],
                 arachnids: []
             },
-            chosenAnimal: null
+            chosenAnimal: null,
+            status: "start"
         };
         return _this2;
     }
@@ -10871,7 +10876,8 @@ var App = function (_React$Component2) {
                         'div',
                         { className: "leftColumn" },
                         infoBox,
-                        _react2.default.createElement(_mapContainer2.default, { onAnchorChange: this.handleAnchorChange, position: this.state.position })
+                        _react2.default.createElement(_mapContainer2.default, { onAnchorChange: this.handleAnchorChange,
+                            position: this.state.position })
                     ),
                     _react2.default.createElement(
                         'div',
@@ -10879,7 +10885,8 @@ var App = function (_React$Component2) {
                         _react2.default.createElement(OptionContainer, { onButtonRadius: this.handleButtonRadius,
                             handleClassifyAnimals: this.handleClassifyAnimals,
                             animalsLists: this.state.animalsLists,
-                            handleGetImages: this.handleGetImages })
+                            handleGetImages: this.handleGetImages,
+                            appState: this.state.status })
                     )
                 ),
                 _react2.default.createElement(_mainTemplate.Footer, null)
@@ -22551,7 +22558,7 @@ exports = module.exports = __webpack_require__(189)(false);
 
 
 // module
-exports.push([module.i, ".mainContainer {\n  font-family: 'Chelsea Market', cursive; }\n\n.mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn {\n  position: relative;\n  width: 40px;\n  height: 40px;\n  border-radius: 50%;\n  background-color: white;\n  color: #795548;\n  transition: all 0.5s;\n  cursor: pointer; }\n  .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn:hover {\n    transform: scale(1.1); }\n  .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn::before, .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn::after {\n    content: \"\";\n    display: block;\n    width: 30px;\n    height: 30px;\n    position: absolute;\n    top: 5px;\n    background-color: inherit;\n    border-radius: inherit; }\n  .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn::before {\n    left: -100%;\n    margin-left: calc((40px / 2)); }\n  .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn::after {\n    right: -100%;\n    margin-right: calc((40px / 2)); }\n  .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn:active {\n    background-color: #ECE9E6; }\n  .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn span {\n    position: absolute;\n    z-index: 3;\n    width: 200%;\n    left: -50%;\n    text-align: center;\n    top: 45%;\n    margin-top: -0.5em;\n    font-size: 20px; }\n\n.mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn:active {\n  transform: translate(0px, 2px);\n  -webkit-transform: translate(0px, 2px);\n  border-bottom: 1px solid #795548; }\n\n* {\n  margin: 0;\n  padding: 0; }\n\n.mainContainer {\n  width: 100vw;\n  height: 100vh;\n  background-image: url(\"http://bi.gazeta.pl/im/9/11023/z11023639IH,Outback-Australia---fot--Shutterstock.jpg\");\n  background-size: cover; }\n  .mainContainer .header {\n    display: flex;\n    align-items: center;\n    color: #FFFFFF;\n    font-size: 40px;\n    height: 11vh;\n    padding-left: 2vw; }\n  .mainContainer .row {\n    display: flex;\n    flex-direction: row;\n    height: 85vh;\n    margin-right: 0;\n    margin-left: 0;\n    width: 100vw;\n    font-size: 20px;\n    color: #FFFFFF; }\n    .mainContainer .row .rightColumn {\n      width: 30vw;\n      display: flex;\n      flex-direction: column;\n      align-items: center; }\n      .mainContainer .row .rightColumn .listSection {\n        height: 100%;\n        width: 80%;\n        margin-left: 2vw;\n        text-align: center; }\n        .mainContainer .row .rightColumn .listSection .list {\n          height: 70%; }\n          .mainContainer .row .rightColumn .listSection .list h1 {\n            font-size: 2.2rem;\n            margin: 1.2vw 0; }\n          .mainContainer .row .rightColumn .listSection .list .listContainer {\n            padding: 2vw 1vw 1vw 1vw;\n            max-height: 60vh;\n            overflow-y: auto;\n            overflow-x: hidden;\n            background-color: rgba(121, 85, 72, 0.6);\n            border-radius: 10px;\n            display: flex;\n            flex-direction: column; }\n            .mainContainer .row .rightColumn .listSection .list .listContainer ul p {\n              color: #D7CCC8;\n              font-size: 25px;\n              cursor: pointer;\n              transition: transform 0.5s;\n              margin-bottom: 0; }\n              .mainContainer .row .rightColumn .listSection .list .listContainer ul p:hover {\n                transform: scale(1.1);\n                color: #FFFFFF; }\n            .mainContainer .row .rightColumn .listSection .list .listContainer ul li {\n              font-size: 18px;\n              list-style-type: none;\n              cursor: pointer;\n              transition: 0.3s; }\n              .mainContainer .row .rightColumn .listSection .list .listContainer ul li:hover {\n                color: #FF5722; }\n        .mainContainer .row .rightColumn .listSection .buttonsDiv {\n          position: relative; }\n          .mainContainer .row .rightColumn .listSection .buttonsDiv span {\n            font-size: 25px; }\n          .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons {\n            text-align: center;\n            margin-top: 1vh; }\n            .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn {\n              margin: 3px 20px; }\n              .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn:hover {\n                color: #FF5722; }\n    .mainContainer .row .leftColumn {\n      width: 70vw;\n      height: 87vh;\n      position: relative;\n      padding-left: 2vw; }\n      .mainContainer .row .leftColumn .image {\n        position: absolute;\n        z-index: 999;\n        width: 100%;\n        height: 85vh;\n        background-color: rgba(93, 64, 55, 0.6); }\n        .mainContainer .row .leftColumn .image button {\n          position: absolute;\n          top: 5px;\n          right: 5px;\n          font-size: 30px;\n          font-weight: 700;\n          line-height: 1;\n          padding: 0 10px;\n          color: #FF5722;\n          text-shadow: 0 1px 0 #fff;\n          filter: alpha(opacity=20);\n          opacity: 0.8; }\n        .mainContainer .row .leftColumn .image img {\n          margin: 0 auto;\n          display: block;\n          max-width: 100%;\n          height: 100%; }\n  .mainContainer .footer {\n    font-size: 13px;\n    height: 4vh;\n    display: flex;\n    align-items: flex-end;\n    justify-content: center;\n    color: #FFFFFF; }\n    .mainContainer .footer a {\n      color: #FFFFFF; }\n", ""]);
+exports.push([module.i, ".mainContainer {\n  font-family: 'Chelsea Market', cursive; }\n\n.mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn {\n  position: relative;\n  width: 40px;\n  height: 40px;\n  border-radius: 50%;\n  background-color: white;\n  color: #795548;\n  transition: all 0.5s;\n  cursor: pointer; }\n  .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn:hover {\n    transform: scale(1.1); }\n  .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn::before, .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn::after {\n    content: \"\";\n    display: block;\n    width: 30px;\n    height: 30px;\n    position: absolute;\n    top: 5px;\n    background-color: inherit;\n    border-radius: inherit; }\n  .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn::before {\n    left: -100%;\n    margin-left: calc((40px / 2)); }\n  .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn::after {\n    right: -100%;\n    margin-right: calc((40px / 2)); }\n  .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn:active {\n    background-color: #ECE9E6; }\n  .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn span {\n    position: absolute;\n    z-index: 3;\n    width: 200%;\n    left: -50%;\n    text-align: center;\n    top: 45%;\n    margin-top: -0.5em;\n    font-size: 20px; }\n\n.mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn:active {\n  transform: translate(0px, 2px);\n  -webkit-transform: translate(0px, 2px);\n  border-bottom: 1px solid #795548; }\n\n.sk-circle {\n  margin: 10vh auto;\n  width: 7vw;\n  height: 7vw;\n  position: relative; }\n\n.sk-circle .sk-child {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0; }\n\n.sk-circle .sk-child:before {\n  content: '';\n  display: block;\n  margin: 0 auto;\n  width: 20%;\n  height: 20%;\n  background-color: #FFFFFF;\n  border-radius: 100%;\n  -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;\n  animation: sk-circleBounceDelay 1.2s infinite ease-in-out both; }\n\n.sk-circle .sk-circle2 {\n  -webkit-transform: rotate(30deg);\n  -ms-transform: rotate(30deg);\n  transform: rotate(30deg); }\n\n.sk-circle .sk-circle3 {\n  -webkit-transform: rotate(60deg);\n  -ms-transform: rotate(60deg);\n  transform: rotate(60deg); }\n\n.sk-circle .sk-circle4 {\n  -webkit-transform: rotate(90deg);\n  -ms-transform: rotate(90deg);\n  transform: rotate(90deg); }\n\n.sk-circle .sk-circle5 {\n  -webkit-transform: rotate(120deg);\n  -ms-transform: rotate(120deg);\n  transform: rotate(120deg); }\n\n.sk-circle .sk-circle6 {\n  -webkit-transform: rotate(150deg);\n  -ms-transform: rotate(150deg);\n  transform: rotate(150deg); }\n\n.sk-circle .sk-circle7 {\n  -webkit-transform: rotate(180deg);\n  -ms-transform: rotate(180deg);\n  transform: rotate(180deg); }\n\n.sk-circle .sk-circle8 {\n  -webkit-transform: rotate(210deg);\n  -ms-transform: rotate(210deg);\n  transform: rotate(210deg); }\n\n.sk-circle .sk-circle9 {\n  -webkit-transform: rotate(240deg);\n  -ms-transform: rotate(240deg);\n  transform: rotate(240deg); }\n\n.sk-circle .sk-circle10 {\n  -webkit-transform: rotate(270deg);\n  -ms-transform: rotate(270deg);\n  transform: rotate(270deg); }\n\n.sk-circle .sk-circle11 {\n  -webkit-transform: rotate(300deg);\n  -ms-transform: rotate(300deg);\n  transform: rotate(300deg); }\n\n.sk-circle .sk-circle12 {\n  -webkit-transform: rotate(330deg);\n  -ms-transform: rotate(330deg);\n  transform: rotate(330deg); }\n\n.sk-circle .sk-circle2:before {\n  -webkit-animation-delay: -1.1s;\n  animation-delay: -1.1s; }\n\n.sk-circle .sk-circle3:before {\n  -webkit-animation-delay: -1s;\n  animation-delay: -1s; }\n\n.sk-circle .sk-circle4:before {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s; }\n\n.sk-circle .sk-circle5:before {\n  -webkit-animation-delay: -0.8s;\n  animation-delay: -0.8s; }\n\n.sk-circle .sk-circle6:before {\n  -webkit-animation-delay: -0.7s;\n  animation-delay: -0.7s; }\n\n.sk-circle .sk-circle7:before {\n  -webkit-animation-delay: -0.6s;\n  animation-delay: -0.6s; }\n\n.sk-circle .sk-circle8:before {\n  -webkit-animation-delay: -0.5s;\n  animation-delay: -0.5s; }\n\n.sk-circle .sk-circle9:before {\n  -webkit-animation-delay: -0.4s;\n  animation-delay: -0.4s; }\n\n.sk-circle .sk-circle10:before {\n  -webkit-animation-delay: -0.3s;\n  animation-delay: -0.3s; }\n\n.sk-circle .sk-circle11:before {\n  -webkit-animation-delay: -0.2s;\n  animation-delay: -0.2s; }\n\n.sk-circle .sk-circle12:before {\n  -webkit-animation-delay: -0.1s;\n  animation-delay: -0.1s; }\n\n@-webkit-keyframes sk-circleBounceDelay {\n  0%, 80%, 100% {\n    -webkit-transform: scale(0);\n    transform: scale(0); }\n  40% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n@keyframes sk-circleBounceDelay {\n  0%, 80%, 100% {\n    -webkit-transform: scale(0);\n    transform: scale(0); }\n  40% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n* {\n  margin: 0;\n  padding: 0; }\n\n.mainContainer {\n  width: 100vw;\n  height: 100vh;\n  background-image: url(\"http://bi.gazeta.pl/im/9/11023/z11023639IH,Outback-Australia---fot--Shutterstock.jpg\");\n  background-size: cover; }\n  .mainContainer .header {\n    display: flex;\n    align-items: center;\n    color: #FFFFFF;\n    font-size: 40px;\n    height: 11vh;\n    padding-left: 2vw; }\n  .mainContainer .row {\n    display: flex;\n    flex-direction: row;\n    height: 85vh;\n    margin-right: 0;\n    margin-left: 0;\n    width: 100vw;\n    font-size: 20px;\n    color: #FFFFFF; }\n    .mainContainer .row .rightColumn {\n      width: 30vw;\n      display: flex;\n      flex-direction: column;\n      align-items: center; }\n      .mainContainer .row .rightColumn .listSection {\n        height: 100%;\n        width: 80%;\n        margin-left: 2vw;\n        text-align: center; }\n        .mainContainer .row .rightColumn .listSection .list {\n          height: 70%;\n          margin-top: 40px; }\n          .mainContainer .row .rightColumn .listSection .list h1 {\n            font-size: 2.2rem;\n            margin: 1.2vw 0; }\n          .mainContainer .row .rightColumn .listSection .list .instruction {\n            background-color: rgba(121, 85, 72, 0.6);\n            border-radius: 10px;\n            padding: 5px 0 20px 0; }\n            .mainContainer .row .rightColumn .listSection .list .instruction li {\n              margin: 0 5px 0 30px; }\n          .mainContainer .row .rightColumn .listSection .list .listContainer {\n            padding: 2vw 1vw 1vw 1vw;\n            max-height: 60vh;\n            overflow-y: auto;\n            overflow-x: hidden;\n            display: flex;\n            flex-direction: column;\n            background-color: rgba(121, 85, 72, 0.6);\n            border-radius: 10px; }\n            .mainContainer .row .rightColumn .listSection .list .listContainer ul p {\n              color: #D7CCC8;\n              font-size: 25px;\n              cursor: pointer;\n              transition: transform 0.5s;\n              margin-bottom: 0; }\n              .mainContainer .row .rightColumn .listSection .list .listContainer ul p:hover {\n                transform: scale(1.1);\n                color: #FFFFFF; }\n            .mainContainer .row .rightColumn .listSection .list .listContainer ul li {\n              font-size: 18px;\n              list-style-type: none;\n              cursor: pointer;\n              transition: 0.3s; }\n              .mainContainer .row .rightColumn .listSection .list .listContainer ul li:hover {\n                color: #FF5722; }\n        .mainContainer .row .rightColumn .listSection .buttonsDiv {\n          position: relative; }\n          .mainContainer .row .rightColumn .listSection .buttonsDiv span {\n            font-size: 25px; }\n          .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons {\n            text-align: center;\n            margin-top: 1vh; }\n            .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn {\n              margin: 3px 20px; }\n              .mainContainer .row .rightColumn .listSection .buttonsDiv .buttons .btn:hover {\n                color: #FF5722; }\n    .mainContainer .row .leftColumn {\n      width: 70vw;\n      height: 87vh;\n      position: relative;\n      padding-left: 2vw; }\n      .mainContainer .row .leftColumn .image {\n        position: absolute;\n        z-index: 999;\n        width: 100%;\n        height: 85vh;\n        background-color: rgba(93, 64, 55, 0.6); }\n        .mainContainer .row .leftColumn .image button {\n          position: absolute;\n          top: 5px;\n          right: 5px;\n          font-size: 30px;\n          font-weight: 700;\n          line-height: 1;\n          padding: 0 1vw;\n          color: #FF5722;\n          text-shadow: 0 1px 0 #fff;\n          filter: alpha(opacity=20);\n          opacity: 0.8; }\n        .mainContainer .row .leftColumn .image img {\n          margin: 0 auto;\n          display: block;\n          max-width: 100%;\n          height: 100%; }\n  .mainContainer .footer {\n    font-size: 13px;\n    height: 4vh;\n    display: flex;\n    align-items: flex-end;\n    justify-content: center;\n    color: #FFFFFF; }\n    .mainContainer .footer a {\n      color: #FFFFFF; }\n", ""]);
 
 // exports
 
@@ -23153,22 +23160,6 @@ var style = {
 var containerStyle = {
     position: "relative"
 };
-
-// class AnimatedLoader extends React.Component{
-//     render(){
-//         return(
-//             <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-//                 <defs>
-//                     <filter id="goo">
-//                         <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-//                         <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 35 -10" result="goo" />
-//                         <feBlend in="SourceGraphic" in2="goo" operator="atop" />
-//                     </filter>
-//                 </defs>
-//             </svg>
-//         )
-//     }
-// }
 
 var MapContainer = exports.MapContainer = function (_React$Component) {
     _inherits(MapContainer, _React$Component);
@@ -25345,20 +25336,86 @@ var AnimalList = function (_React$Component) {
     _createClass(AnimalList, [{
         key: "render",
         value: function render() {
-            return _react2.default.createElement(
-                "div",
-                { className: "list" },
-                _react2.default.createElement(
-                    "h1",
-                    null,
-                    "Choose a class:"
-                ),
-                _react2.default.createElement(
+            if (this.props.appState === "start") {
+                return _react2.default.createElement(
                     "div",
-                    { className: "listContainer" },
-                    this.createUl()
-                )
-            );
+                    { className: "list" },
+                    _react2.default.createElement(
+                        "p",
+                        null,
+                        _react2.default.createElement(
+                            "ol",
+                            { className: "instruction" },
+                            _react2.default.createElement(
+                                "h1",
+                                null,
+                                "How to use it?"
+                            ),
+                            _react2.default.createElement(
+                                "li",
+                                null,
+                                "Click on the map to select area."
+                            ),
+                            _react2.default.createElement(
+                                "li",
+                                null,
+                                "Wait until list of animals groups is loaded."
+                            ),
+                            _react2.default.createElement(
+                                "li",
+                                null,
+                                "Expand the list to see all the species."
+                            ),
+                            _react2.default.createElement(
+                                "li",
+                                null,
+                                "Click on the species to see the foto."
+                            ),
+                            _react2.default.createElement(
+                                "li",
+                                null,
+                                "Choose radius of area (buttons with kilometers)."
+                            )
+                        )
+                    )
+                );
+            } else if (this.props.appState === "waiting") {
+                return _react2.default.createElement(
+                    "div",
+                    { className: "list" },
+                    _react2.default.createElement(
+                        "div",
+                        { className: "sk-circle" },
+                        _react2.default.createElement("div", { className: "sk-circle1 sk-child" }),
+                        _react2.default.createElement("div", { className: "sk-circle2 sk-child" }),
+                        _react2.default.createElement("div", { className: "sk-circle3 sk-child" }),
+                        _react2.default.createElement("div", { className: "sk-circle4 sk-child" }),
+                        _react2.default.createElement("div", { className: "sk-circle5 sk-child" }),
+                        _react2.default.createElement("div", { className: "sk-circle6 sk-child" }),
+                        _react2.default.createElement("div", { className: "sk-circle7 sk-child" }),
+                        _react2.default.createElement("div", { className: "sk-circle8 sk-child" }),
+                        _react2.default.createElement("div", { className: "sk-circle9 sk-child" }),
+                        _react2.default.createElement("div", { className: "sk-circle10 sk-child" }),
+                        _react2.default.createElement("div", { className: "sk-circle11 sk-child" }),
+                        _react2.default.createElement("div", { className: "sk-circle12 sk-child" })
+                    )
+                );
+            } else if (this.props.appState === "done") {
+                return _react2.default.createElement(
+                    "div",
+                    { className: "list" },
+                    _react2.default.createElement(
+                        "h1",
+                        null,
+                        "Choose a class:"
+                    ),
+                    _react2.default.createElement(
+                        "div",
+                        { className: "listContainer" },
+                        this.createUl()
+                    )
+                );
+            }
         }
     }]);
 
