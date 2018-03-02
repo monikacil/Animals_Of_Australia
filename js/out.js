@@ -10736,6 +10736,7 @@ var App = function (_React$Component2) {
             fetch(apiAdress).then(function (r) {
                 return r.json();
             }).then(function (data) {
+                console.log(data.occurrences);
                 _this2.setState({ status: "done" });
                 _this2.handleClassifyAnimals(data.occurrences);
             });
@@ -10784,6 +10785,7 @@ var App = function (_React$Component2) {
             var amphibians = [];
             var insects = [];
             var arachnids = [];
+            var fishes = [];
 
             list.forEach(function (e) {
                 if (e.classs === "Aves" || e.speciesGroups[1] === "Birds") {
@@ -10828,6 +10830,13 @@ var App = function (_React$Component2) {
                     }) === undefined) {
                         arachnids.push({ name: _nameOfGroup5, img: e.imageUrls });
                     }
+                } else if (e.classs === "Actinopterygii" || e.speciesGroups[1] === "Fishes") {
+                    var _nameOfGroup6 = _this2.getNameOfGroups(e);
+                    if (_nameOfGroup6 !== null && fishes.find(function (e) {
+                        return e.name === _nameOfGroup6;
+                    }) === undefined) {
+                        fishes.push({ name: _nameOfGroup6, img: e.imageUrls });
+                    }
                 }
             });
 
@@ -10838,7 +10847,8 @@ var App = function (_React$Component2) {
                     reptiles: reptiles,
                     amphibians: amphibians,
                     insects: insects,
-                    arachnids: arachnids
+                    arachnids: arachnids,
+                    fishes: fishes
                 }
             });
         };
@@ -10855,7 +10865,8 @@ var App = function (_React$Component2) {
                 reptiles: [],
                 amphibians: [],
                 insects: [],
-                arachnids: []
+                arachnids: [],
+                fishes: []
             },
             chosenAnimal: null,
             status: "start"
@@ -25311,7 +25322,7 @@ var AnimalList = function (_React$Component) {
         };
 
         _this.createUl = function () {
-            var groupOfAnimals = [{ name: "Mammals", group: _this.props.animalsLists.mammals }, { name: "Birds", group: _this.props.animalsLists.birds }, { name: "Reptiles", group: _this.props.animalsLists.reptiles }, { name: "Amphibians", group: _this.props.animalsLists.amphibians }, { name: "Insects", group: _this.props.animalsLists.insects }, { name: "Arachnids", group: _this.props.animalsLists.arachnids }];
+            var groupOfAnimals = [{ name: "Mammals", group: _this.props.animalsLists.mammals }, { name: "Birds", group: _this.props.animalsLists.birds }, { name: "Reptiles", group: _this.props.animalsLists.reptiles }, { name: "Amphibians", group: _this.props.animalsLists.amphibians }, { name: "Insects", group: _this.props.animalsLists.insects }, { name: "Arachnids", group: _this.props.animalsLists.arachnids }, { name: "Fishes", group: _this.props.animalsLists.fishes }];
             return groupOfAnimals.map(function (el, index) {
                 var liElements = void 0;
                 if (_this.state.dataAnimals.indexOf(index) !== -1) {

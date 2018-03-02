@@ -37,6 +37,7 @@ class App extends React.Component{
                 amphibians : [],
                 insects : [],
                 arachnids : [],
+                fishes : []
             },
             chosenAnimal: null,
             status: "start"
@@ -102,6 +103,7 @@ class App extends React.Component{
         let amphibians = [];
         let insects = [];
         let arachnids = [];
+        let fishes = [];
 
         list.forEach(e => {
             if (e.classs === "Aves" || e.speciesGroups[1] === "Birds") {
@@ -140,6 +142,12 @@ class App extends React.Component{
                     arachnids.push({name: nameOfGroup, img: e.imageUrls});
                 }
             }
+            else if (e.classs === "Actinopterygii" || e.speciesGroups[1] === "Fishes") {
+                let nameOfGroup = this.getNameOfGroups(e);
+                if(nameOfGroup !== null && fishes.find(e => e.name === nameOfGroup) === undefined){
+                    fishes.push({name: nameOfGroup, img: e.imageUrls});
+                }
+            }
         });
 
         this.setState({
@@ -150,6 +158,7 @@ class App extends React.Component{
                 amphibians : amphibians,
                 insects : insects,
                 arachnids : arachnids,
+                fishes: fishes
             }
         });
     };

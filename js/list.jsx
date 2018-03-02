@@ -38,6 +38,7 @@ export default class AnimalList extends React.Component{
             {name: "Amphibians", group: this.props.animalsLists.amphibians},
             {name: "Insects", group: this.props.animalsLists.insects},
             {name: "Arachnids", group: this.props.animalsLists.arachnids},
+            {name: "Fishes", group: this.props.animalsLists.fishes},
         ];
         return groupOfAnimals.map((el, index)=>{
             let liElements;
