@@ -18,7 +18,13 @@ export default class RadiusButtons extends React.Component{
                     <span>Select radius: </span>
                     <div className={"buttons"}>
                         {this.radius.map((el, index) => {
-                            return <div className={"btn"} key={index}><span onClick={this.btnChange} data-value={el}>{el} km</span></div>
+                            let className;
+                            if(this.props.radius === el) {
+                                className = "btn activeBtn";
+                            } else{
+                                className = "btn"
+                            }
+                            return <div className={className} key={index}><span onClick={this.btnChange} data-value={el}>{el} km</span></div>
                         })}
                     </div>
                 </div>

@@ -98,11 +98,16 @@
               @extend %buttons;
               margin: 3px 20px;
               &:hover{
-                color: $accent-color;
+                color: #083040;
               }
               &:active{
                 @extend %activeButtons;
               }
+            }
+            .activeBtn{
+              background-color: #D5E1E6;
+              color: #083040;
+              transform: scale(1.1);
             }
           }
         }

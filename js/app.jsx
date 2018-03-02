@@ -11,7 +11,8 @@ class OptionContainer extends React.Component{
     render(){
         return(
             <div className={"listSection"}>
-                <RadiusButtons onButtonRadius={this.props.onButtonRadius}/>
+                <RadiusButtons onButtonRadius={this.props.onButtonRadius}
+                               radius={this.props.radius}/>
                 <AnimalList animalsLists={this.props.animalsLists}
                             handleGetImages={this.props.handleGetImages}
                             appState={this.props.appState}/>
@@ -65,7 +66,7 @@ class App extends React.Component{
         this.setState({
             radius: radius,
         });
-        if(this.state.position.longitude !== null & this.state.position.latitude !== null) {
+        if(this.state.position.longitude !== null && this.state.position.latitude !== null) {
             this.setState({
                 status: "waiting"
             });
@@ -171,6 +172,7 @@ class App extends React.Component{
                                          handleClassifyAnimals={this.handleClassifyAnimals}
                                          animalsLists={this.state.animalsLists}
                                          handleGetImages={this.handleGetImages}
+                                         radius={this.state.radius}
                                          appState={this.state.status}/>
                     </div>
                 </div>
