@@ -1,5 +1,13 @@
 import React from 'react';
 
+const listOfAreas = [{longitude: 132.4340057373047,
+latitude: -12.630455567979785}, {longitude: 152.1112060546875,
+latitude: -26.181321125359688}, {longitude: 139.4769287109375,
+latitude: -34.29466478367243}, {longitude: 128.6663818359375,
+latitude: -15.544991314777425}, {longitude: 114.9993896484375,
+latitude: -28.677335277734677}, {longitude: 133.890380859375,
+latitude: -23.57657430554567}];
+
 export default class AnimalList extends React.Component{
     constructor(props) {
         super(props);
@@ -51,6 +59,18 @@ export default class AnimalList extends React.Component{
             </ul>)
         })
     };
+    checkListLength = () => {
+        if(this.props.animalsLists.mammals.length === 0 && this.props.animalsLists.birds.length === 0
+            && this.props.animalsLists.reptiles.length === 0 && this.props.animalsLists.amphibians.length === 0
+            && this.props.animalsLists.insects.length === 0 && this.props.animalsLists.arachnids.length === 0
+            && this.props.animalsLists.fishes.length === 0){
+            return true;
+        }
+    };
+    showRandomArea = () => {
+        let index = Math.floor((Math.random() * 6));
+        this.props.handleShowRandomArea(listOfAreas[index]);
+    };
 
     render(){
         if(this.props.appState === "start"){
@@ -84,6 +104,15 @@ export default class AnimalList extends React.Component{
                             <div className={"sk-circle12 sk-child"}></div>
                         </div>
                     </div>
+                </div>
+            )
+        } else if(this.checkListLength() === true){
+            return (
+                <div className={"list"}>
+                    <ol className={"instruction"}><h1>Sorry, but there are no animals here...</h1>
+                        <li>Try to select bigger radius or change the area.</li>
+                        <li>Or just <span className={"showSomeAnimals"} onClick={this.showRandomArea}>click</span> if you want to see some interesting animals!</li>
+                    </ol>
                 </div>
             )
         } else if(this.props.appState === "done") {

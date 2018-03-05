@@ -7,20 +7,6 @@ import InfoBox from "./infoBox.jsx";
 import RadiusButtons from "./radiusButtons.jsx";
 import {Header, Footer} from "./mainTemplate.jsx";
 
-class OptionContainer extends React.Component{
-    render(){
-        return(
-            <div className={"listSection"}>
-                <RadiusButtons onButtonRadius={this.props.onButtonRadius}
-                               radius={this.props.radius}/>
-                <AnimalList animalsLists={this.props.animalsLists}
-                            handleGetImages={this.props.handleGetImages}
-                            appState={this.props.appState}/>
-            </div>
-        )
-    }
-}
-
 class App extends React.Component{
     constructor(props){
         super(props);
@@ -94,6 +80,17 @@ class App extends React.Component{
         this.setState({
             chosenAnimal: null
         })
+    };
+
+    handleShowRandomArea = (positionObj) => {
+        this.setState({
+            position : {
+                latitude: positionObj.latitude,
+                longitude: positionObj.longitude
+            },
+            status: "waiting"
+        });
+        this.getData(positionObj.latitude, positionObj.longitude, this.state.radius);
     };
 
     handleClassifyAnimals = (list) => {
@@ -177,12 +174,15 @@ class App extends React.Component{
                                       position={this.state.position}/>
                     </div>
                     <div className={"rightColumn"}>
-                        <OptionContainer onButtonRadius={this.handleButtonRadius}
-                                         handleClassifyAnimals={this.handleClassifyAnimals}
-                                         animalsLists={this.state.animalsLists}
-                                         handleGetImages={this.handleGetImages}
-                                         radius={this.state.radius}
-                                         appState={this.state.status}/>
+                        <div className={"listSection"}>
+                            <RadiusButtons onButtonRadius={this.handleButtonRadius}
+                                           radius={this.state.radius}/>
+                            <AnimalList animalsLists={this.state.animalsLists}
+                                        handleClassifyAnimals={this.handleClassifyAnimals}
+                                        handleGetImages={this.handleGetImages}
+                                        appState={this.state.status}
+                                        handleShowRandomArea={this.handleShowRandomArea}/>
+                        </div>
                     </div>
                 </div>
                 <Footer />

@@ -10685,75 +10685,48 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var OptionContainer = function (_React$Component) {
-    _inherits(OptionContainer, _React$Component);
-
-    function OptionContainer() {
-        _classCallCheck(this, OptionContainer);
-
-        return _possibleConstructorReturn(this, (OptionContainer.__proto__ || Object.getPrototypeOf(OptionContainer)).apply(this, arguments));
-    }
-
-    _createClass(OptionContainer, [{
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'div',
-                { className: "listSection" },
-                _react2.default.createElement(_radiusButtons2.default, { onButtonRadius: this.props.onButtonRadius,
-                    radius: this.props.radius }),
-                _react2.default.createElement(_list2.default, { animalsLists: this.props.animalsLists,
-                    handleGetImages: this.props.handleGetImages,
-                    appState: this.props.appState })
-            );
-        }
-    }]);
-
-    return OptionContainer;
-}(_react2.default.Component);
-
-var App = function (_React$Component2) {
-    _inherits(App, _React$Component2);
+var App = function (_React$Component) {
+    _inherits(App, _React$Component);
 
     function App(props) {
         _classCallCheck(this, App);
 
-        var _this2 = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
+        var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-        _this2.handleAnchorChange = function (latitude, longitude) {
-            _this2.setState({
+        _this.handleAnchorChange = function (latitude, longitude) {
+            _this.setState({
                 position: {
                     latitude: latitude,
                     longitude: longitude
                 },
                 status: "waiting"
             });
-            _this2.getData(latitude, longitude, _this2.state.radius);
+            _this.getData(latitude, longitude, _this.state.radius);
         };
 
-        _this2.getData = function (lat, lon, rad) {
+        _this.getData = function (lat, lon, rad) {
             var apiAdress = 'https://biocache.ala.org.au/ws/occurrences/search?pageSize=200&fq=kingdom:Animalia&fq=multimedia:Image&lat=' + lat + '&lon=' + lon + '&radius=' + rad;
             fetch(apiAdress).then(function (r) {
                 return r.json();
             }).then(function (data) {
-                _this2.setState({ status: "done" });
-                _this2.handleClassifyAnimals(data.occurrences);
+                _this.setState({ status: "done" });
+                _this.handleClassifyAnimals(data.occurrences);
             });
         };
 
-        _this2.handleButtonRadius = function (radius) {
-            _this2.setState({
+        _this.handleButtonRadius = function (radius) {
+            _this.setState({
                 radius: radius
             });
-            if (_this2.state.position.longitude !== null && _this2.state.position.latitude !== null) {
-                _this2.setState({
+            if (_this.state.position.longitude !== null && _this.state.position.latitude !== null) {
+                _this.setState({
                     status: "waiting"
                 });
-                _this2.getData(_this2.state.position.latitude, _this2.state.position.longitude, radius);
+                _this.getData(_this.state.position.latitude, _this.state.position.longitude, radius);
             }
         };
 
-        _this2.getNameOfGroups = function (obj) {
+        _this.getNameOfGroups = function (obj) {
             if (obj.vernacularName) {
                 return obj.vernacularName;
             } else if (obj.raw_vernacularName) {
@@ -10765,19 +10738,30 @@ var App = function (_React$Component2) {
             }
         };
 
-        _this2.handleGetImages = function (animal) {
-            _this2.setState({
+        _this.handleGetImages = function (animal) {
+            _this.setState({
                 chosenAnimal: animal
             });
         };
 
-        _this2.handleCloseInfoBtn = function () {
-            _this2.setState({
+        _this.handleCloseInfoBtn = function () {
+            _this.setState({
                 chosenAnimal: null
             });
         };
 
-        _this2.handleClassifyAnimals = function (list) {
+        _this.handleShowRandomArea = function (positionObj) {
+            _this.setState({
+                position: {
+                    latitude: positionObj.latitude,
+                    longitude: positionObj.longitude
+                },
+                status: "waiting"
+            });
+            _this.getData(positionObj.latitude, positionObj.longitude, _this.state.radius);
+        };
+
+        _this.handleClassifyAnimals = function (list) {
             var mammals = [];
             var birds = [];
             var reptiles = [];
@@ -10788,49 +10772,49 @@ var App = function (_React$Component2) {
 
             list.forEach(function (e) {
                 if (e.classs === "Aves" || e.speciesGroups[1] === "Birds") {
-                    var nameOfGroup = _this2.getNameOfGroups(e);
+                    var nameOfGroup = _this.getNameOfGroups(e);
                     if (nameOfGroup !== null && birds.find(function (e) {
                         return e.name === nameOfGroup;
                     }) === undefined) {
                         birds.push({ name: nameOfGroup, img: e.imageUrls });
                     }
                 } else if (e.classs === "Insecta" || e.speciesGroups[1] === "Insects") {
-                    var _nameOfGroup = _this2.getNameOfGroups(e);
+                    var _nameOfGroup = _this.getNameOfGroups(e);
                     if (_nameOfGroup !== null && insects.find(function (e) {
                         return e.name === _nameOfGroup;
                     }) === undefined) {
                         insects.push({ name: _nameOfGroup, img: e.imageUrls });
                     }
                 } else if (e.classs === "Mammalia" || e.speciesGroups[1] === "Mammals") {
-                    var _nameOfGroup2 = _this2.getNameOfGroups(e);
+                    var _nameOfGroup2 = _this.getNameOfGroups(e);
                     if (_nameOfGroup2 !== null && mammals.find(function (e) {
                         return e.name === _nameOfGroup2;
                     }) === undefined) {
                         mammals.push({ name: _nameOfGroup2, img: e.imageUrls });
                     }
                 } else if (e.classs === "Amphibia" || e.speciesGroups[1] === "Amphibians") {
-                    var _nameOfGroup3 = _this2.getNameOfGroups(e);
+                    var _nameOfGroup3 = _this.getNameOfGroups(e);
                     if (_nameOfGroup3 !== null && amphibians.find(function (e) {
                         return e.name === _nameOfGroup3;
                     }) === undefined) {
                         amphibians.push({ name: _nameOfGroup3, img: e.imageUrls });
                     }
                 } else if (e.classs === "Reptilia" || e.speciesGroups[1] === "Reptiles") {
-                    var _nameOfGroup4 = _this2.getNameOfGroups(e);
+                    var _nameOfGroup4 = _this.getNameOfGroups(e);
                     if (_nameOfGroup4 !== null && reptiles.find(function (e) {
                         return e.name === _nameOfGroup4;
                     }) === undefined) {
                         reptiles.push({ name: _nameOfGroup4, img: e.imageUrls });
                     }
                 } else if (e.classs === "Arachnida" || e.speciesGroups[1] === "Arachnids") {
-                    var _nameOfGroup5 = _this2.getNameOfGroups(e);
+                    var _nameOfGroup5 = _this.getNameOfGroups(e);
                     if (_nameOfGroup5 !== null && arachnids.find(function (e) {
                         return e.name === _nameOfGroup5;
                     }) === undefined) {
                         arachnids.push({ name: _nameOfGroup5, img: e.imageUrls });
                     }
                 } else if (e.classs === "Actinopterygii" || e.speciesGroups[1] === "Fishes") {
-                    var _nameOfGroup6 = _this2.getNameOfGroups(e);
+                    var _nameOfGroup6 = _this.getNameOfGroups(e);
                     if (_nameOfGroup6 !== null && fishes.find(function (e) {
                         return e.name === _nameOfGroup6;
                     }) === undefined) {
@@ -10839,7 +10823,7 @@ var App = function (_React$Component2) {
                 }
             });
 
-            _this2.setState({
+            _this.setState({
                 animalsLists: {
                     mammals: mammals,
                     birds: birds,
@@ -10852,7 +10836,7 @@ var App = function (_React$Component2) {
             });
         };
 
-        _this2.state = {
+        _this.state = {
             radius: "50",
             position: {
                 latitude: null,
@@ -10870,7 +10854,7 @@ var App = function (_React$Component2) {
             chosenAnimal: null,
             status: "start"
         };
-        return _this2;
+        return _this;
     }
 
     _createClass(App, [{
@@ -10897,12 +10881,17 @@ var App = function (_React$Component2) {
                     _react2.default.createElement(
                         'div',
                         { className: "rightColumn" },
-                        _react2.default.createElement(OptionContainer, { onButtonRadius: this.handleButtonRadius,
-                            handleClassifyAnimals: this.handleClassifyAnimals,
-                            animalsLists: this.state.animalsLists,
-                            handleGetImages: this.handleGetImages,
-                            radius: this.state.radius,
-                            appState: this.state.status })
+                        _react2.default.createElement(
+                            'div',
+                            { className: "listSection" },
+                            _react2.default.createElement(_radiusButtons2.default, { onButtonRadius: this.handleButtonRadius,
+                                radius: this.state.radius }),
+                            _react2.default.createElement(_list2.default, { animalsLists: this.state.animalsLists,
+                                handleClassifyAnimals: this.handleClassifyAnimals,
+                                handleGetImages: this.handleGetImages,
+                                appState: this.state.status,
+                                handleShowRandomArea: this.handleShowRandomArea })
+                        )
                     )
                 ),
                 _react2.default.createElement(_mainTemplate.Footer, null)
@@ -22574,7 +22563,7 @@ exports = module.exports = __webpack_require__(189)(false);
 
 
 // module
-exports.push([module.i, ".sk-circle {\n  width: 7vw;\n  height: 7vw;\n  position: relative; }\n\n.sk-circle .sk-child {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0; }\n\n.sk-circle .sk-child:before {\n  content: '';\n  display: block;\n  margin: 0 auto;\n  width: 20%;\n  height: 20%;\n  background-color: #FFFFFF;\n  border-radius: 100%;\n  -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;\n  animation: sk-circleBounceDelay 1.2s infinite ease-in-out both; }\n\n.sk-circle .sk-circle2 {\n  -webkit-transform: rotate(30deg);\n  -ms-transform: rotate(30deg);\n  transform: rotate(30deg); }\n\n.sk-circle .sk-circle3 {\n  -webkit-transform: rotate(60deg);\n  -ms-transform: rotate(60deg);\n  transform: rotate(60deg); }\n\n.sk-circle .sk-circle4 {\n  -webkit-transform: rotate(90deg);\n  -ms-transform: rotate(90deg);\n  transform: rotate(90deg); }\n\n.sk-circle .sk-circle5 {\n  -webkit-transform: rotate(120deg);\n  -ms-transform: rotate(120deg);\n  transform: rotate(120deg); }\n\n.sk-circle .sk-circle6 {\n  -webkit-transform: rotate(150deg);\n  -ms-transform: rotate(150deg);\n  transform: rotate(150deg); }\n\n.sk-circle .sk-circle7 {\n  -webkit-transform: rotate(180deg);\n  -ms-transform: rotate(180deg);\n  transform: rotate(180deg); }\n\n.sk-circle .sk-circle8 {\n  -webkit-transform: rotate(210deg);\n  -ms-transform: rotate(210deg);\n  transform: rotate(210deg); }\n\n.sk-circle .sk-circle9 {\n  -webkit-transform: rotate(240deg);\n  -ms-transform: rotate(240deg);\n  transform: rotate(240deg); }\n\n.sk-circle .sk-circle10 {\n  -webkit-transform: rotate(270deg);\n  -ms-transform: rotate(270deg);\n  transform: rotate(270deg); }\n\n.sk-circle .sk-circle11 {\n  -webkit-transform: rotate(300deg);\n  -ms-transform: rotate(300deg);\n  transform: rotate(300deg); }\n\n.sk-circle .sk-circle12 {\n  -webkit-transform: rotate(330deg);\n  -ms-transform: rotate(330deg);\n  transform: rotate(330deg); }\n\n.sk-circle .sk-circle2:before {\n  -webkit-animation-delay: -1.1s;\n  animation-delay: -1.1s; }\n\n.sk-circle .sk-circle3:before {\n  -webkit-animation-delay: -1s;\n  animation-delay: -1s; }\n\n.sk-circle .sk-circle4:before {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s; }\n\n.sk-circle .sk-circle5:before {\n  -webkit-animation-delay: -0.8s;\n  animation-delay: -0.8s; }\n\n.sk-circle .sk-circle6:before {\n  -webkit-animation-delay: -0.7s;\n  animation-delay: -0.7s; }\n\n.sk-circle .sk-circle7:before {\n  -webkit-animation-delay: -0.6s;\n  animation-delay: -0.6s; }\n\n.sk-circle .sk-circle8:before {\n  -webkit-animation-delay: -0.5s;\n  animation-delay: -0.5s; }\n\n.sk-circle .sk-circle9:before {\n  -webkit-animation-delay: -0.4s;\n  animation-delay: -0.4s; }\n\n.sk-circle .sk-circle10:before {\n  -webkit-animation-delay: -0.3s;\n  animation-delay: -0.3s; }\n\n.sk-circle .sk-circle11:before {\n  -webkit-animation-delay: -0.2s;\n  animation-delay: -0.2s; }\n\n.sk-circle .sk-circle12:before {\n  -webkit-animation-delay: -0.1s;\n  animation-delay: -0.1s; }\n\n@-webkit-keyframes sk-circleBounceDelay {\n  0%, 80%, 100% {\n    -webkit-transform: scale(0);\n    transform: scale(0); }\n  40% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n@keyframes sk-circleBounceDelay {\n  0%, 80%, 100% {\n    -webkit-transform: scale(0);\n    transform: scale(0); }\n  40% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n* {\n  margin: 0;\n  padding: 0; }\n\n.header {\n  display: flex;\n  align-items: center;\n  color: #FFFFFF;\n  font-size: 40px;\n  height: 11vh;\n  padding-left: 2vw; }\n\n.mainContainer {\n  font-family: 'Chelsea Market', cursive;\n  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);\n  width: 100vw;\n  height: 100vh;\n  background-image: url(\"http://bi.gazeta.pl/im/9/11023/z11023639IH,Outback-Australia---fot--Shutterstock.jpg\");\n  background-size: cover; }\n  .mainContainer .row {\n    display: flex;\n    flex-direction: row;\n    height: 85vh;\n    margin-right: 0;\n    margin-left: 0;\n    width: 100vw;\n    font-size: 20px;\n    color: #FFFFFF; }\n    .mainContainer .row .rightColumn {\n      width: 30vw;\n      display: flex;\n      flex-direction: column;\n      align-items: center; }\n    .mainContainer .row .leftColumn {\n      width: 70vw;\n      height: 87vh;\n      position: relative;\n      padding-left: 2vw; }\n  .mainContainer .footer {\n    font-size: 13px;\n    height: 4vh;\n    display: flex;\n    align-items: flex-end;\n    justify-content: center;\n    color: #FFFFFF; }\n    .mainContainer .footer a {\n      color: #FFFFFF; }\n\n.image {\n  position: absolute;\n  z-index: 999;\n  width: 100%;\n  height: 85vh;\n  background-color: rgba(121, 85, 72, 0.6); }\n  .image button {\n    position: absolute;\n    top: 5px;\n    right: 5px;\n    font-size: 30px;\n    font-weight: 700;\n    line-height: 1;\n    padding: 0 1vw;\n    color: #FF5722;\n    text-shadow: 0 1px 0 #fff;\n    filter: alpha(opacity=20);\n    opacity: 0.8; }\n  .image img {\n    margin: 0 auto;\n    display: block;\n    max-width: 100%;\n    height: 100%; }\n\n.buttonsDiv {\n  position: relative; }\n  .buttonsDiv span {\n    font-size: 25px; }\n  .buttonsDiv .buttons {\n    text-align: center;\n    margin-top: 1vh; }\n    .buttonsDiv .buttons .btn {\n      position: relative;\n      width: 40px;\n      height: 40px;\n      border-radius: 50%;\n      background-color: #FFFFFF;\n      box-shadow: 1px 1px 8px 0px white;\n      color: #795548;\n      transition: all 0.5s;\n      cursor: pointer;\n      margin: 3px 20px;\n      text-shadow: none; }\n      .buttonsDiv .buttons .btn:hover {\n        transform: scale(1.1); }\n      .buttonsDiv .buttons .btn::before, .buttonsDiv .buttons .btn::after {\n        content: \"\";\n        display: block;\n        width: 30px;\n        height: 30px;\n        position: absolute;\n        top: 5px;\n        background-color: inherit;\n        box-shadow: inherit;\n        border-radius: inherit; }\n      .buttonsDiv .buttons .btn::before {\n        left: -100%;\n        margin-left: calc((40px / 2)); }\n      .buttonsDiv .buttons .btn::after {\n        right: -100%;\n        margin-right: calc((40px / 2)); }\n      .buttonsDiv .buttons .btn:active {\n        background-color: #ECE9E6; }\n      .buttonsDiv .buttons .btn span {\n        position: absolute;\n        z-index: 3;\n        width: 200%;\n        left: -50%;\n        text-align: center;\n        top: 45%;\n        margin-top: -0.5em;\n        font-size: 17.3913px; }\n      .buttonsDiv .buttons .btn:hover {\n        color: #083040; }\n      .buttonsDiv .buttons .btn:active {\n        transform: translate(0px, 2px);\n        border-bottom: 1px solid #795548; }\n    .buttonsDiv .buttons .activeBtn {\n      background-color: #D5E1E6;\n      box-shadow: 1px 1px 8px 0 #d5e1e6;\n      color: #083040;\n      transform: scale(1.1); }\n\n.listSection {\n  color: #FFFFFF;\n  height: 100%;\n  width: 80%;\n  margin-left: 2vw;\n  text-align: center; }\n  .listSection .list {\n    height: 70%;\n    margin-top: 40px; }\n    .listSection .list .loader {\n      height: 100%;\n      display: flex;\n      flex-direction: column;\n      align-items: center;\n      justify-content: center; }\n    .listSection .list h1 {\n      font-size: 2.2rem;\n      margin: 1.2vw 0;\n      text-align: center; }\n    .listSection .list .instruction {\n      background-color: rgba(121, 85, 72, 0.6);\n      box-shadow: 0 0 8px 0 #5d4037;\n      border-radius: 10px;\n      padding: 5px 0 20px 0;\n      text-align: left; }\n      .listSection .list .instruction li {\n        margin: 0 5px 0 30px; }\n\n.listContainer {\n  padding: 2vw 1vw 1vw 1vw;\n  max-height: 60vh;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: flex;\n  flex-direction: column;\n  background-color: rgba(121, 85, 72, 0.6);\n  border-radius: 10px;\n  box-shadow: 0 0 8px 0 #5d4037; }\n  .listContainer::-webkit-scrollbar-track {\n    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);\n    border-radius: 10px;\n    background-color: rgba(205, 175, 164, 0.4); }\n  .listContainer::-webkit-scrollbar {\n    width: 12px;\n    border-radius: 10px;\n    background-color: rgba(205, 175, 164, 0.4); }\n  .listContainer::-webkit-scrollbar-thumb {\n    border-radius: 10px;\n    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);\n    background-color: rgba(121, 85, 72, 0.5); }\n  .listContainer ul p {\n    color: #E0D9D6;\n    font-size: 25px;\n    cursor: pointer;\n    transition: transform 0.5s;\n    margin-bottom: 0; }\n    .listContainer ul p:hover {\n      transform: scale(1.1);\n      color: #FFFFFF; }\n  .listContainer ul li {\n    font-size: 18px;\n    list-style-type: none;\n    cursor: pointer;\n    transition: 0.3s;\n    text-transform: capitalize; }\n    .listContainer ul li:hover {\n      color: #FF5722; }\n", ""]);
+exports.push([module.i, ".sk-circle {\n  width: 7vw;\n  height: 7vw;\n  position: relative; }\n\n.sk-circle .sk-child {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n  left: 0;\n  top: 0; }\n\n.sk-circle .sk-child:before {\n  content: '';\n  display: block;\n  margin: 0 auto;\n  width: 20%;\n  height: 20%;\n  background-color: #FFFFFF;\n  border-radius: 100%;\n  -webkit-animation: sk-circleBounceDelay 1.2s infinite ease-in-out both;\n  animation: sk-circleBounceDelay 1.2s infinite ease-in-out both; }\n\n.sk-circle .sk-circle2 {\n  -webkit-transform: rotate(30deg);\n  -ms-transform: rotate(30deg);\n  transform: rotate(30deg); }\n\n.sk-circle .sk-circle3 {\n  -webkit-transform: rotate(60deg);\n  -ms-transform: rotate(60deg);\n  transform: rotate(60deg); }\n\n.sk-circle .sk-circle4 {\n  -webkit-transform: rotate(90deg);\n  -ms-transform: rotate(90deg);\n  transform: rotate(90deg); }\n\n.sk-circle .sk-circle5 {\n  -webkit-transform: rotate(120deg);\n  -ms-transform: rotate(120deg);\n  transform: rotate(120deg); }\n\n.sk-circle .sk-circle6 {\n  -webkit-transform: rotate(150deg);\n  -ms-transform: rotate(150deg);\n  transform: rotate(150deg); }\n\n.sk-circle .sk-circle7 {\n  -webkit-transform: rotate(180deg);\n  -ms-transform: rotate(180deg);\n  transform: rotate(180deg); }\n\n.sk-circle .sk-circle8 {\n  -webkit-transform: rotate(210deg);\n  -ms-transform: rotate(210deg);\n  transform: rotate(210deg); }\n\n.sk-circle .sk-circle9 {\n  -webkit-transform: rotate(240deg);\n  -ms-transform: rotate(240deg);\n  transform: rotate(240deg); }\n\n.sk-circle .sk-circle10 {\n  -webkit-transform: rotate(270deg);\n  -ms-transform: rotate(270deg);\n  transform: rotate(270deg); }\n\n.sk-circle .sk-circle11 {\n  -webkit-transform: rotate(300deg);\n  -ms-transform: rotate(300deg);\n  transform: rotate(300deg); }\n\n.sk-circle .sk-circle12 {\n  -webkit-transform: rotate(330deg);\n  -ms-transform: rotate(330deg);\n  transform: rotate(330deg); }\n\n.sk-circle .sk-circle2:before {\n  -webkit-animation-delay: -1.1s;\n  animation-delay: -1.1s; }\n\n.sk-circle .sk-circle3:before {\n  -webkit-animation-delay: -1s;\n  animation-delay: -1s; }\n\n.sk-circle .sk-circle4:before {\n  -webkit-animation-delay: -0.9s;\n  animation-delay: -0.9s; }\n\n.sk-circle .sk-circle5:before {\n  -webkit-animation-delay: -0.8s;\n  animation-delay: -0.8s; }\n\n.sk-circle .sk-circle6:before {\n  -webkit-animation-delay: -0.7s;\n  animation-delay: -0.7s; }\n\n.sk-circle .sk-circle7:before {\n  -webkit-animation-delay: -0.6s;\n  animation-delay: -0.6s; }\n\n.sk-circle .sk-circle8:before {\n  -webkit-animation-delay: -0.5s;\n  animation-delay: -0.5s; }\n\n.sk-circle .sk-circle9:before {\n  -webkit-animation-delay: -0.4s;\n  animation-delay: -0.4s; }\n\n.sk-circle .sk-circle10:before {\n  -webkit-animation-delay: -0.3s;\n  animation-delay: -0.3s; }\n\n.sk-circle .sk-circle11:before {\n  -webkit-animation-delay: -0.2s;\n  animation-delay: -0.2s; }\n\n.sk-circle .sk-circle12:before {\n  -webkit-animation-delay: -0.1s;\n  animation-delay: -0.1s; }\n\n@-webkit-keyframes sk-circleBounceDelay {\n  0%, 80%, 100% {\n    -webkit-transform: scale(0);\n    transform: scale(0); }\n  40% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n@keyframes sk-circleBounceDelay {\n  0%, 80%, 100% {\n    -webkit-transform: scale(0);\n    transform: scale(0); }\n  40% {\n    -webkit-transform: scale(1);\n    transform: scale(1); } }\n\n* {\n  margin: 0;\n  padding: 0; }\n\n.header {\n  display: flex;\n  align-items: center;\n  color: #FFFFFF;\n  font-size: 40px;\n  height: 11vh;\n  padding-left: 2vw; }\n\n.mainContainer {\n  font-family: 'Chelsea Market', cursive;\n  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);\n  width: 100vw;\n  height: 100vh;\n  background-image: url(\"http://bi.gazeta.pl/im/9/11023/z11023639IH,Outback-Australia---fot--Shutterstock.jpg\");\n  background-size: cover; }\n  .mainContainer .row {\n    display: flex;\n    flex-direction: row;\n    height: 85vh;\n    margin-right: 0;\n    margin-left: 0;\n    width: 100vw;\n    font-size: 20px;\n    color: #FFFFFF; }\n    .mainContainer .row .rightColumn {\n      width: 30vw;\n      display: flex;\n      flex-direction: column;\n      align-items: center; }\n    .mainContainer .row .leftColumn {\n      width: 70vw;\n      height: 87vh;\n      position: relative;\n      padding-left: 2vw; }\n  .mainContainer .footer {\n    font-size: 13px;\n    height: 4vh;\n    display: flex;\n    align-items: flex-end;\n    justify-content: center;\n    color: #FFFFFF; }\n    .mainContainer .footer a {\n      color: #FFFFFF; }\n\n.image {\n  position: absolute;\n  z-index: 999;\n  width: 100%;\n  height: 85vh;\n  background-color: rgba(121, 85, 72, 0.6); }\n  .image button {\n    position: absolute;\n    top: 5px;\n    right: 5px;\n    font-size: 30px;\n    font-weight: 700;\n    line-height: 1;\n    padding: 0 1vw;\n    color: #FF5722;\n    text-shadow: 0 1px 0 #fff;\n    filter: alpha(opacity=20);\n    opacity: 0.8; }\n  .image img {\n    margin: 0 auto;\n    display: block;\n    max-width: 100%;\n    height: 100%; }\n\n.buttonsDiv {\n  position: relative; }\n  .buttonsDiv span {\n    font-size: 25px; }\n  .buttonsDiv .buttons {\n    text-align: center;\n    margin-top: 1vh; }\n    .buttonsDiv .buttons .btn {\n      position: relative;\n      width: 40px;\n      height: 40px;\n      border-radius: 50%;\n      background-color: #FFFFFF;\n      box-shadow: 1px 1px 8px 0px white;\n      color: #795548;\n      transition: all 0.5s;\n      cursor: pointer;\n      margin: 3px 20px;\n      text-shadow: none; }\n      .buttonsDiv .buttons .btn:hover {\n        transform: scale(1.1); }\n      .buttonsDiv .buttons .btn::before, .buttonsDiv .buttons .btn::after {\n        content: \"\";\n        display: block;\n        width: 30px;\n        height: 30px;\n        position: absolute;\n        top: 5px;\n        background-color: inherit;\n        box-shadow: inherit;\n        border-radius: inherit; }\n      .buttonsDiv .buttons .btn::before {\n        left: -100%;\n        margin-left: calc((40px / 2)); }\n      .buttonsDiv .buttons .btn::after {\n        right: -100%;\n        margin-right: calc((40px / 2)); }\n      .buttonsDiv .buttons .btn:active {\n        background-color: #ECE9E6; }\n      .buttonsDiv .buttons .btn span {\n        position: absolute;\n        z-index: 3;\n        width: 200%;\n        left: -50%;\n        text-align: center;\n        top: 45%;\n        margin-top: -0.5em;\n        font-size: 17.3913px; }\n      .buttonsDiv .buttons .btn:hover {\n        color: #083040; }\n      .buttonsDiv .buttons .btn:active {\n        transform: translate(0px, 2px);\n        border-bottom: 1px solid #795548; }\n    .buttonsDiv .buttons .activeBtn {\n      background-color: #D5E1E6;\n      box-shadow: 1px 1px 8px 0 #d5e1e6;\n      color: #083040;\n      transform: scale(1.1); }\n\n.listSection {\n  color: #FFFFFF;\n  height: 100%;\n  width: 80%;\n  margin-left: 2vw;\n  text-align: center; }\n  .listSection .list {\n    height: 70%;\n    margin-top: 40px; }\n    .listSection .list .loader {\n      height: 100%;\n      display: flex;\n      flex-direction: column;\n      align-items: center;\n      justify-content: center; }\n    .listSection .list h1 {\n      font-size: 2.2rem;\n      margin: 1.2vw 0;\n      text-align: center; }\n    .listSection .list .showSomeAnimals {\n      text-transform: uppercase;\n      cursor: pointer;\n      text-decoration: underline; }\n      .listSection .list .showSomeAnimals:hover {\n        color: #FF5722; }\n    .listSection .list .instruction {\n      background-color: rgba(121, 85, 72, 0.6);\n      box-shadow: 0 0 8px 0 #5d4037;\n      border-radius: 10px;\n      padding: 5px 0 20px 0;\n      text-align: left; }\n      .listSection .list .instruction li {\n        margin: 0 5px 0 30px; }\n\n.listContainer {\n  padding: 2vw 1vw 1vw 1vw;\n  max-height: 60vh;\n  overflow-y: auto;\n  overflow-x: hidden;\n  display: flex;\n  flex-direction: column;\n  background-color: rgba(121, 85, 72, 0.6);\n  border-radius: 10px;\n  box-shadow: 0 0 8px 0 #5d4037; }\n  .listContainer::-webkit-scrollbar-track {\n    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);\n    border-radius: 10px;\n    background-color: rgba(205, 175, 164, 0.4); }\n  .listContainer::-webkit-scrollbar {\n    width: 12px;\n    border-radius: 10px;\n    background-color: rgba(205, 175, 164, 0.4); }\n  .listContainer::-webkit-scrollbar-thumb {\n    border-radius: 10px;\n    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);\n    background-color: rgba(121, 85, 72, 0.5); }\n  .listContainer ul p {\n    color: #E0D9D6;\n    font-size: 25px;\n    cursor: pointer;\n    transition: transform 0.5s;\n    margin-bottom: 0; }\n    .listContainer ul p:hover {\n      transform: scale(1.1);\n      color: #FFFFFF; }\n  .listContainer ul li {\n    font-size: 18px;\n    list-style-type: none;\n    cursor: pointer;\n    transition: 0.3s;\n    text-transform: capitalize; }\n    .listContainer ul li:hover {\n      color: #FF5722; }\n", ""]);
 
 // exports
 
@@ -25285,6 +25274,14 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var listOfAreas = [{ longitude: 132.4340057373047,
+    latitude: -12.630455567979785 }, { longitude: 152.1112060546875,
+    latitude: -26.181321125359688 }, { longitude: 139.4769287109375,
+    latitude: -34.29466478367243 }, { longitude: 128.6663818359375,
+    latitude: -15.544991314777425 }, { longitude: 114.9993896484375,
+    latitude: -28.677335277734677 }, { longitude: 133.890380859375,
+    latitude: -23.57657430554567 }];
+
 var AnimalList = function (_React$Component) {
     _inherits(AnimalList, _React$Component);
 
@@ -25342,6 +25339,17 @@ var AnimalList = function (_React$Component) {
                     liElements
                 );
             });
+        };
+
+        _this.checkListLength = function () {
+            if (_this.props.animalsLists.mammals.length === 0 && _this.props.animalsLists.birds.length === 0 && _this.props.animalsLists.reptiles.length === 0 && _this.props.animalsLists.amphibians.length === 0 && _this.props.animalsLists.insects.length === 0 && _this.props.animalsLists.arachnids.length === 0 && _this.props.animalsLists.fishes.length === 0) {
+                return true;
+            }
+        };
+
+        _this.showRandomArea = function () {
+            var index = Math.floor(Math.random() * 6);
+            _this.props.handleShowRandomArea(listOfAreas[index]);
         };
 
         _this.state = {
@@ -25414,6 +25422,36 @@ var AnimalList = function (_React$Component) {
                             _react2.default.createElement("div", { className: "sk-circle10 sk-child" }),
                             _react2.default.createElement("div", { className: "sk-circle11 sk-child" }),
                             _react2.default.createElement("div", { className: "sk-circle12 sk-child" })
+                        )
+                    )
+                );
+            } else if (this.checkListLength() === true) {
+                return _react2.default.createElement(
+                    "div",
+                    { className: "list" },
+                    _react2.default.createElement(
+                        "ol",
+                        { className: "instruction" },
+                        _react2.default.createElement(
+                            "h1",
+                            null,
+                            "Sorry, but there are no animals here..."
+                        ),
+                        _react2.default.createElement(
+                            "li",
+                            null,
+                            "Try to select bigger radius or change the area."
+                        ),
+                        _react2.default.createElement(
+                            "li",
+                            null,
+                            "Or just ",
+                            _react2.default.createElement(
+                                "span",
+                                { className: "showSomeAnimals", onClick: this.showRandomArea },
+                                "click"
+                            ),
+                            " if you want to see some interesting animals!"
                         )
                     )
                 );
